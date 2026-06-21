@@ -229,10 +229,35 @@ export default function Showcase() {
           transform: translateY(-2px) scale(0.98);
           box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
         }
+        @media (max-width: 640px) {
+          .sw-grid { grid-template-columns: 1fr !important; }
+          .sw-header { padding: 6px 16px !important; }
+          .sw-header-inner { padding: 0 !important; }
+          .sw-hero-title { font-size: 28px !important; }
+          .sw-section { padding: 24px 16px 60px !important; }
+          .sw-hero-section { padding: 12px 16px !important; }
+          .sw-hero-section-inner { padding: 0 !important; }
+          .sw-footer { padding: 16px !important; }
+          .sw-footer-inner { flex-direction: column !important; gap: 8px !important; text-align: center !important; }
+          .sw-modal { width: 100vw !important; height: 100vh !important; max-width: 100vw !important; max-height: 100vh !important; border-radius: 0 !important; }
+          .sw-creative1-modal { flex-direction: column !important; }
+          .sw-creative1-modal > div { flex: none !important; height: 50% !important; }
+          .sw-creative1-details { bottom: 12px !important; left: 50% !important; transform: translateX(-50%) !important; padding: 8px 14px !important; gap: 10px !important; }
+          .sw-creative1-details > span:first-child { font-size: 9px !important; }
+          .sw-creative2-modal-car { right: 50% !important; transform: translateX(50%) !important; bottom: 4% !important; width: 50% !important; }
+          .sw-creative2-modal-car { width: 90% !important; max-width: 280px !important; }
+          .sw-header-nav { gap: 4px !important; }
+        }
+        @media (max-width: 380px) {
+          .sw-hero-title { font-size: 22px !important; }
+          .sw-grid { gap: 16px !important; }
+          .sw-section { padding: 16px 12px 40px !important; }
+        }
       `}</style>
 
       {/* === HEADER === */}
       <header
+        className="sw-header"
         style={{
           position: "fixed",
           top: 0,
@@ -245,6 +270,7 @@ export default function Showcase() {
         }}
       >
         <div
+          className="sw-header-inner"
           style={{
             maxWidth: 1280,
             margin: "0 auto",
@@ -272,7 +298,8 @@ export default function Showcase() {
                   filter: "blur(16px)",
                   borderRadius: "50%",
                   transform: "scale(1.3)",
-                  background: "linear-gradient(135deg, rgba(0,229,255,0.15), rgba(59,130,246,0.15))",
+                  background:
+                    "linear-gradient(135deg, rgba(0,229,255,0.15), rgba(59,130,246,0.15))",
                   transition: "all 0.5s",
                 }}
               />
@@ -319,7 +346,7 @@ export default function Showcase() {
               </span>
             </div>
           </a>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <div className="sw-header-nav" style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <a
               href="/experience-creative1"
               style={{
@@ -358,12 +385,16 @@ export default function Showcase() {
       <main style={{ paddingTop: 80 }}>
         {/* === HERO === */}
         <section
+          className="sw-hero-section"
           style={{
             borderBottom: "1px solid rgba(245, 242, 237, 0.06)",
             background: "linear-gradient(180deg, rgba(0, 212, 170, 0.04) 0%, transparent 100%)",
           }}
         >
-          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "16px 32px" }}>
+          <div
+            className="sw-hero-section-inner"
+            style={{ maxWidth: 1280, margin: "0 auto", padding: "16px 32px" }}
+          >
             <div
               style={{
                 display: "inline-flex",
@@ -381,6 +412,7 @@ export default function Showcase() {
               Creative Showcase
             </div>
             <h1
+              className="sw-hero-title"
               style={{
                 fontSize: 40,
                 fontWeight: 700,
@@ -408,7 +440,10 @@ export default function Showcase() {
         </section>
 
         {/* === CREATIVE GRID === */}
-        <section style={{ maxWidth: 1280, margin: "0 auto", padding: "40px 32px 80px" }}>
+        <section
+          className="sw-section"
+          style={{ maxWidth: 1280, margin: "0 auto", padding: "40px 32px 80px" }}
+        >
           <div
             style={{
               display: "flex",
@@ -455,6 +490,7 @@ export default function Showcase() {
           </div>
 
           <div
+            className="sw-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
@@ -1128,6 +1164,7 @@ export default function Showcase() {
 
         {/* === FOOTER === */}
         <footer
+          className="sw-footer"
           style={{
             borderTop: "1px solid rgba(245, 242, 237, 0.06)",
             padding: "20px 32px",
@@ -1135,6 +1172,7 @@ export default function Showcase() {
           }}
         >
           <div
+            className="sw-footer-inner"
             style={{
               maxWidth: 1280,
               margin: "0 auto",
@@ -1330,6 +1368,7 @@ function Creative1Full({ soundOn }: { soundOn: boolean }) {
 
   return (
     <div
+      className="sw-creative1-modal"
       style={{
         width: "100%",
         height: "100%",
@@ -1541,6 +1580,7 @@ function Creative1Full({ soundOn }: { soundOn: boolean }) {
 
         {/* Kia Syros car image */}
         <div
+          className="sw-creative2-modal-car"
           style={{
             position: "absolute",
             right: "5%",
@@ -1566,7 +1606,7 @@ function Creative1Full({ soundOn }: { soundOn: boolean }) {
       {/* Floating details */}
       {showDetails && (
         <div
-          className="sv-full-detail"
+          className="sv-full-detail sw-creative1-details"
           style={{
             position: "absolute",
             bottom: 24,
@@ -1879,6 +1919,12 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
         @keyframes sc-pulseDot { 0%,100%{opacity:.3; transform:scale(1)} 50%{opacity:1; transform:scale(1.6)} }
         @keyframes sc-progressFill { 0%{width:0%} 100%{width:100%} }
         @keyframes sc-carDrift { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+        @media (max-width: 640px) {
+          .sc2-reveal-text { max-width: 85% !important; left: 50% !important; transform: translate(-50%, -50%) !important; text-align: center !important; }
+          .sc2-reveal-text h2 { font-size: 18px !important; }
+          .sc2-reveal-car { width: 100% !important; height: 45% !important; top: auto !important; bottom: 0 !important; clip-path: none !important; }
+          .sc2-chaos-title { font-size: 17px !important; }
+        }
       `}</style>
 
       <audio ref={audioRef} src={TRAFFIC_AUDIO} loop preload="auto" />
@@ -2023,7 +2069,7 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
             <div className="absolute left-0 right-0 top-4 px-6 text-center">
               <div className="text-[9px] tracking-[.25em] text-white/70 mb-1">KIA SYROS EV</div>
               <h1
-                className="text-white font-extrabold text-xl leading-tight"
+                className="text-white font-extrabold text-xl leading-tight sc2-chaos-title"
                 style={{ textShadow: "0 2px 14px rgba(0,0,0,.8)" }}
               >
                 Ready for a different kind of drive?
@@ -2166,7 +2212,7 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
               style={{ filter: "brightness(.7) saturate(1.05)" }}
             />
             <div
-              className="absolute right-0 top-0 bottom-0 w-[55%] overflow-hidden"
+              className="absolute right-0 top-0 bottom-0 w-[55%] overflow-hidden sc2-reveal-car"
               style={{
                 clipPath: "polygon(12% 0, 100% 0, 100% 100%, 0 100%)",
                 animation: scene === "reveal" ? "sc-fadeIn .8s .2s both" : "none",
@@ -2182,7 +2228,7 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
               />
             </div>
             <div
-              className="absolute left-5 top-1/2 -translate-y-1/2 max-w-[42%] z-10"
+              className="absolute left-5 top-1/2 -translate-y-1/2 max-w-[42%] z-10 sc2-reveal-text"
               style={{ animation: scene === "reveal" ? "sc-fadeUp .8s .2s both" : "none" }}
             >
               <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/15 backdrop-blur text-white text-[8px] tracking-[.25em] mb-3 border border-white/20">

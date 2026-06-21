@@ -8,8 +8,6 @@ import trafficAudioUrl from "../assets/traffic.mp3";
 import kiaSyrosImgUrl from "../assets/kia-syros.png";
 import kiaSyrosDriveUrl from "../assets/kia-syros-drive.mp4";
 
-
-
 const TRAFFIC_IMG = trafficAsset.url;
 const ROAD_IMG = roadAsset.url;
 const TRAFFIC_VIDEO = trafficVideoUrl;
@@ -439,12 +437,34 @@ export default function Index() {
           0%, 100% { transform: scaleY(0.4); }
           50% { transform: scaleY(1); }
         }
+        @media (max-width: 640px) {
+          .sv-hero-title { font-size: 28px !important; }
+          .sv-hero-sub { font-size: 16px !important; }
+          .sv-state3-title { font-size: 30px !important; }
+          .sv-state3-sub { font-size: 16px !important; }
+          .sv-popup-card { width: calc(100vw - 32px) !important; right: 16px !important; bottom: 16px !important; }
+          .sv-popup-card-img { height: 160px !important; }
+          .sv-sound-toggle { top: 12px !important; right: 12px !important; padding: 6px 10px 6px 8px !important; font-size: 10px !important; }
+          .sv-state3-cta { flex-direction: column !important; gap: 12px !important; margin-bottom: 40px !important; }
+          .sv-state3-cta-btn { padding: 12px 24px !important; font-size: 13px !important; }
+          .sv-hero-text { padding: 0 20px !important; }
+          .sv-hero-intro { font-size: 11px !important; letter-spacing: 4px !important; margin-bottom: 12px !important; }
+          .sv-wave-wrap { max-width: 100% !important; }
+          .sv-wave-wrap svg { width: 100% !important; height: auto !important; max-height: 200px !important; }
+          .sv-wave-wrap-right svg { max-height: 140px !important; }
+        }
+        @media (max-width: 380px) {
+          .sv-hero-title { font-size: 22px !important; }
+          .sv-state3-title { font-size: 24px !important; }
+          .sv-state3-sub { font-size: 14px !important; }
+        }
       `}</style>
 
       {/* Sound toggle (top-right) */}
       <button
         onClick={toggleSound}
         aria-label={soundOn ? "Mute" : "Unmute"}
+        className="sv-sound-toggle"
         style={{
           position: "absolute",
           top: 22,
@@ -568,6 +588,7 @@ export default function Index() {
 
         {/* Sound waves */}
         <div
+          className="sv-wave-wrap"
           style={{
             position: "absolute",
             inset: 0,
@@ -594,7 +615,7 @@ export default function Index() {
         {currentState === 2 && popupVisible && (
           <button
             onClick={goState3}
-            className="sv-popup"
+            className="sv-popup sv-popup-card"
             style={{
               position: popupZooming ? "fixed" : "absolute",
               right: popupZooming ? 0 : 24,
@@ -635,7 +656,7 @@ export default function Index() {
               }}
             />
             <div
-              className="sv-popup-img"
+              className="sv-popup-img sv-popup-card-img"
               style={{
                 width: "100%",
                 height: popupZooming ? "100vh" : 210,
@@ -796,6 +817,7 @@ export default function Index() {
 
         {/* Gentle waves */}
         <div
+          className="sv-wave-wrap sv-wave-wrap-right"
           style={{
             position: "absolute",
             inset: 0,
@@ -855,6 +877,7 @@ export default function Index() {
           }}
         >
           <div
+            className="sv-hero-text"
             style={{
               animation: heroTextExiting
                 ? "sv-hero-text-out 1.2s cubic-bezier(0.7, 0, 0.2, 1) forwards"
@@ -864,6 +887,7 @@ export default function Index() {
             }}
           >
             <div
+              className="sv-hero-intro"
               style={{
                 fontSize: 14,
                 letterSpacing: 6,
@@ -877,6 +901,7 @@ export default function Index() {
               Introducing
             </div>
             <h2
+              className="sv-hero-title"
               style={{
                 fontSize: 44,
                 fontWeight: 700,
@@ -936,7 +961,7 @@ export default function Index() {
           </div>
 
           <h1
-            className="sv-headline"
+            className="sv-headline sv-state3-title"
             style={{
               fontSize: 48,
               fontWeight: 700,
@@ -950,7 +975,7 @@ export default function Index() {
             Less Noise. More Journey.
           </h1>
           <p
-            className="sv-subhead"
+            className="sv-subhead sv-state3-sub"
             style={{
               fontSize: 22,
               fontWeight: 300,
@@ -965,7 +990,7 @@ export default function Index() {
           </p>
 
           <div
-            className="sv-cta"
+            className="sv-cta sv-state3-cta"
             style={{
               marginTop: "auto",
               display: "flex",
@@ -975,7 +1000,7 @@ export default function Index() {
             }}
           >
             <button
-              className="sv-cta-primary"
+              className="sv-cta-primary sv-state3-cta-btn"
               style={{
                 background: "#00D4AA",
                 color: "#0A1420",
@@ -992,7 +1017,7 @@ export default function Index() {
             </button>
             <span style={{ color: "rgba(255,255,255,0.4)", fontSize: 18 }}>|</span>
             <button
-              className="sv-cta-ghost"
+              className="sv-cta-ghost sv-state3-cta-btn"
               style={{
                 background: "transparent",
                 color: "#fff",

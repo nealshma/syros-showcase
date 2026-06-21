@@ -12,8 +12,6 @@ import thumb3Url from "../assets/08-d (4).avif";
 import thumb4Url from "../assets/08-d.avif";
 import pauseBgUrl from "../assets/syros-2.jpg";
 
-
-
 const TRAFFIC_AUDIO = trafficAudioUrl;
 const TRAFFIC_VIDEO = trafficVideoUrl;
 const ROAD_VIDEO = kiaSyrosDriveUrl;
@@ -230,6 +228,30 @@ export default function AdPage() {
         @keyframes sc-pulseDot { 0%,100%{opacity:.3; transform:scale(1)} 50%{opacity:1; transform:scale(1.6)} }
         @keyframes sc-progressFill { 0%{width:0%} 100%{width:100%} }
         @keyframes sc-carDrift { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+        @media (max-width: 640px) {
+          .sc-reveal-text { max-width: 85% !important; left: 50% !important; transform: translate(-50%, -50%) !important; text-align: center !important; }
+          .sc-reveal-text h2 { font-size: 22px !important; }
+          .sc-reveal-text p { font-size: 13px !important; }
+          .sc-reveal-thumbs { justify-content: center !important; }
+          .sc-reveal-thumbs > div { width: 48px !important; height: 32px !important; }
+          .sc-reveal-btns { justify-content: center !important; }
+          .sc-reveal-card { width: 40px !important; height: 26px !important; }
+          .sc-chaos-title { font-size: 20px !important; }
+          .sc-chaos-honk { font-size: 18px !important; }
+          .sc-pause-title { font-size: 26px !important; letter-spacing: 0.15em !important; }
+          .sc-pause-sub { font-size: 16px !important; }
+          .sc-pause-body { font-size: 14px !important; }
+          .sc-car-video-clip { width: 100% !important; height: 45% !important; top: auto !important; bottom: 0 !important; clip-path: none !important; }
+          .sc-kia-logo { top: 10px !important; right: 12px !important; }
+          .sc-kia-logo span:first-child { font-size: 14px !important; }
+          .sc-progress-bar { height: 2px !important; }
+        }
+        @media (max-width: 380px) {
+          .sc-reveal-text { max-width: 92% !important; }
+          .sc-reveal-text h2 { font-size: 18px !important; }
+          .sc-chaos-title { font-size: 17px !important; }
+          .sc-pause-title { font-size: 20px !important; }
+        }
       `}</style>
 
       <div
@@ -370,7 +392,7 @@ export default function AdPage() {
               ].map((p, i) => (
                 <div
                   key={i}
-                  className="absolute text-[#FFB400] font-black tracking-wider select-none"
+                  className="absolute text-[#FFB400] font-black tracking-wider select-none sc-chaos-honk"
                   style={{
                     left: p.l,
                     top: p.t,
@@ -385,7 +407,7 @@ export default function AdPage() {
               <div className="absolute left-0 right-0 top-6 px-8 text-center">
                 <div className="text-[11px] tracking-[.3em] text-white/70 mb-2">KIA SYROS EV</div>
                 <h1
-                  className="text-white font-extrabold text-3xl md:text-4xl leading-tight"
+                  className="text-white font-extrabold text-3xl md:text-4xl leading-tight sc-chaos-title"
                   style={{ textShadow: "0 2px 18px rgba(0,0,0,.8)" }}
                 >
                   Ready for a different kind of drive?
@@ -449,7 +471,7 @@ export default function AdPage() {
               />
               <div className="absolute inset-0 flex flex-col items-center justify-center pb-12">
                 <div
-                  className="text-[38px] tracking-[.25em] text-[#00E5A0] font-black"
+                  className="text-[38px] tracking-[.25em] text-[#00E5A0] font-black sc-pause-title"
                   style={{
                     textShadow: "0 0 24px rgba(0,229,160,.5)",
                     animation: "sc-fadeUp .5s .2s both",
@@ -458,7 +480,7 @@ export default function AdPage() {
                   — SILENT MODE —
                 </div>
                 <div
-                  className="text-white text-[22px] tracking-[.15em] font-semibold mt-2"
+                  className="text-white text-[22px] tracking-[.15em] font-semibold mt-2 sc-pause-sub"
                   style={{
                     textShadow: "0 0 18px rgba(0,229,160,.35)",
                     animation: "sc-fadeUp .5s .3s both",
@@ -485,7 +507,7 @@ export default function AdPage() {
                   ))}
                 </div>
                 <div
-                  className="text-white/70 text-[18px] italic font-light mt-4"
+                  className="text-white/70 text-[18px] italic font-light mt-4 sc-pause-body"
                   style={{
                     textShadow: "0 0 12px rgba(0,229,160,.3)",
                     animation: "sc-fadeUp .6s 1s both",
@@ -494,7 +516,7 @@ export default function AdPage() {
                   ( pause and listen )
                 </div>
                 <div
-                  className="flex items-center gap-2 mt-6 text-white text-[20px]"
+                  className="flex items-center gap-2 mt-6 text-white text-[20px] sc-pause-body"
                   style={{ animation: "sc-fadeUp .6s 1.2s both" }}
                 >
                   <span>Experience silence differently.</span>
@@ -532,7 +554,7 @@ export default function AdPage() {
                 style={{ filter: "brightness(.7) saturate(1.05)" }}
               />
               <div
-                className="absolute right-0 top-0 bottom-0 w-[58%] overflow-hidden"
+                className="absolute right-0 top-0 bottom-0 w-[58%] overflow-hidden sc-car-video-clip"
                 style={{
                   clipPath: "polygon(12% 0, 100% 0, 100% 100%, 0 100%)",
                   animation: scene === "reveal" ? "sc-fadeIn .8s .2s both" : "none",
@@ -548,7 +570,7 @@ export default function AdPage() {
                 />
               </div>
               <div
-                className="absolute left-8 top-1/2 -translate-y-1/2 max-w-[44%] z-10"
+                className="absolute left-8 top-1/2 -translate-y-1/2 max-w-[44%] z-10 sc-reveal-text"
                 style={{ animation: scene === "reveal" ? "sc-fadeUp .8s .2s both" : "none" }}
               >
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur text-white text-[10px] tracking-[.3em] mb-4 border border-white/20">
@@ -563,7 +585,7 @@ export default function AdPage() {
                   <span className="text-[#5AE0A0]">Just the sound of silence.</span>
                 </h2>
                 <p className="text-white/85 mt-3 text-base">Syros EV. EV for Everyone.</p>
-                <div className="mt-5 flex gap-1">
+                <div className="mt-5 flex gap-1 sc-reveal-thumbs">
                   {[
                     { src: THUMB1, label: "RED" },
                     { src: THUMB2, label: "BLUE" },
@@ -572,7 +594,7 @@ export default function AdPage() {
                   ].map((t, i) => (
                     <div
                       key={t.label}
-                      className="relative w-[68px] h-[44px] rounded-md overflow-hidden border border-white/25 shadow-lg"
+                      className="relative w-[68px] h-[44px] rounded-md overflow-hidden border border-white/25 shadow-lg sc-reveal-card"
                       style={{ animation: `sc-fadeUp .6s ${0.5 + i * 0.1}s both` }}
                     >
                       <img src={t.src} alt={t.label} className="w-full h-full object-cover" />
@@ -583,7 +605,7 @@ export default function AdPage() {
                     </div>
                   ))}
                 </div>
-                <div className="mt-5 flex items-center gap-3">
+                <div className="mt-5 flex items-center gap-3 sc-reveal-btns">
                   <a
                     href="https://www.kia.com/in/our-vehicles/syros/showroom.html"
                     target="_blank"
@@ -602,7 +624,7 @@ export default function AdPage() {
                   </a>
                 </div>
               </div>
-              <div className="absolute top-5 right-6 flex items-center gap-2 text-white z-10">
+              <div className="absolute top-5 right-6 flex items-center gap-2 text-white z-10 sc-kia-logo">
                 <span className="font-black tracking-widest text-lg">KIA</span>
                 <span className="w-px h-4 bg-white/40" />
                 <span className="text-xs tracking-[.25em]">SYROS EV</span>
@@ -610,7 +632,7 @@ export default function AdPage() {
             </div>
 
             {/* Progress bar */}
-            <div className="absolute left-0 right-0 bottom-0 h-1 bg-white/10">
+            <div className="absolute left-0 right-0 bottom-0 h-1 bg-white/10 sc-progress-bar">
               <div
                 className="h-full bg-[#5AE0A0]"
                 style={{
