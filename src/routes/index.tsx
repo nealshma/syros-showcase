@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
-import { X, Eye, Monitor, Smartphone, Zap, Volume2, VolumeX, ArrowUpRight } from "lucide-react";
+import { X, Eye, Monitor, Smartphone, Volume2, VolumeX, ArrowUpRight } from "lucide-react";
 import kiaSyrosImgUrl from "../assets/kia-syros.png";
 import roadImgAsset from "../assets/road.jpg.asset.json";
 import trafficImgAsset from "../assets/traffic.jpg.asset.json";
@@ -264,7 +264,7 @@ function Showcase() {
           style={{
             maxWidth: 1280,
             margin: "0 auto",
-            padding: "14px 32px",
+            padding: "8px 32px",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -275,37 +275,65 @@ function Showcase() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 10,
+              gap: 20,
               textDecoration: "none",
               color: "#F5F2ED",
             }}
           >
+            <div style={{ position: "relative" }}>
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  filter: "blur(16px)",
+                  borderRadius: "50%",
+                  transform: "scale(1.3)",
+                  background: "linear-gradient(135deg, rgba(0,229,255,0.15), rgba(59,130,246,0.15))",
+                  transition: "all 0.5s",
+                }}
+              />
+              <img
+                src="https://cdn.adcountymedia.com/upload/2026-04-27/b38cd1323d4e70fb/new-and-white.png"
+                alt="AdaxxPro"
+                style={{
+                  position: "relative",
+                  height: 64,
+                  width: "auto",
+                  filter:
+                    "brightness(1.15) contrast(1.15) drop-shadow(0 0 10px rgba(0,229,255,0.15))",
+                  transition: "all 0.3s",
+                }}
+              />
+            </div>
             <div
               style={{
-                width: 28,
-                height: 28,
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, #00D4AA, #006B5E)",
                 display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                flexDirection: "column",
+                gap: 2,
+                color: "rgba(245, 242, 237, 0.7)",
               }}
             >
-              <Zap size={14} style={{ fill: "#0E0E10", color: "#0E0E10" }} />
+              <span
+                style={{
+                  fontSize: 11,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.3em",
+                  fontWeight: 600,
+                }}
+              >
+                Powered By
+              </span>
+              <span
+                style={{
+                  fontSize: 13,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.25em",
+                  fontWeight: 500,
+                }}
+              >
+                Adcounty Media
+              </span>
             </div>
-            <span style={{ fontWeight: 600, fontSize: 15, letterSpacing: "-0.3px" }}>
-              Soundscape
-            </span>
-            <span
-              style={{
-                fontWeight: 300,
-                fontSize: 13,
-                color: "rgba(245, 242, 237, 0.5)",
-                marginLeft: 4,
-              }}
-            >
-              Showcase
-            </span>
           </a>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <a
