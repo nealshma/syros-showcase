@@ -795,13 +795,36 @@ function Showcase() {
                   <div
                     style={{
                       flex: 1,
-                      background: "linear-gradient(135deg, rgba(200,40,40,.25), rgba(0,0,0,.8))",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       position: "relative",
+                      overflow: "hidden",
                     }}
                   >
+                    <video
+                      src={TRAFFIC_VIDEO}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      poster={TRAFFIC_IMG}
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        filter: "brightness(0.4) contrast(1.1)",
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        background: "linear-gradient(135deg, rgba(200,40,40,.25), rgba(0,0,0,.6))",
+                      }}
+                    />
                     <svg
                       width="28"
                       height="28"
@@ -811,6 +834,7 @@ function Showcase() {
                       strokeWidth="1.8"
                       strokeLinecap="round"
                       strokeLinejoin="round"
+                      style={{ zIndex: 1 }}
                     >
                       <path d="M11 5L6 9H2v6h4l5 4V5z" />
                       <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
@@ -823,6 +847,7 @@ function Showcase() {
                         textTransform: "uppercase",
                         letterSpacing: "0.12em",
                         color: "rgba(255,180,0,.6)",
+                        zIndex: 1,
                       }}
                     >
                       Chaos
@@ -831,19 +856,39 @@ function Showcase() {
                   <div
                     style={{
                       flex: 1,
-                      background: "linear-gradient(135deg, rgba(0,229,160,.15), rgba(0,0,0,.8))",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       position: "relative",
+                      overflow: "hidden",
                     }}
                   >
+                    <img
+                      src={PAUSE_BG}
+                      alt=""
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        filter: "brightness(0.4)",
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        background: "linear-gradient(135deg, rgba(0,229,160,.15), rgba(0,0,0,.6))",
+                      }}
+                    />
                     <span
                       style={{
                         fontSize: 18,
                         fontWeight: 900,
                         color: "rgba(0,229,160,.5)",
                         letterSpacing: "0.1em",
+                        zIndex: 1,
                       }}
                     >
                       — —
@@ -856,6 +901,7 @@ function Showcase() {
                         textTransform: "uppercase",
                         letterSpacing: "0.12em",
                         color: "rgba(0,229,160,.6)",
+                        zIndex: 1,
                       }}
                     >
                       Pause
@@ -864,14 +910,44 @@ function Showcase() {
                   <div
                     style={{
                       flex: 1,
-                      background: "linear-gradient(135deg, rgba(90,224,160,.2), rgba(0,0,0,.8))",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       position: "relative",
+                      overflow: "hidden",
                     }}
                   >
-                    <span style={{ fontSize: 12, fontWeight: 700, color: "rgba(90,224,160,.5)" }}>
+                    <video
+                      src={ROAD_VIDEO}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      poster={ROAD_IMG}
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        filter: "brightness(0.35)",
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        background: "linear-gradient(135deg, rgba(90,224,160,.15), rgba(0,0,0,.6))",
+                      }}
+                    />
+                    <span
+                      style={{
+                        fontSize: 12,
+                        fontWeight: 700,
+                        color: "rgba(90,224,160,.5)",
+                        zIndex: 1,
+                      }}
+                    >
                       EV
                     </span>
                     <span
@@ -882,6 +958,7 @@ function Showcase() {
                         textTransform: "uppercase",
                         letterSpacing: "0.12em",
                         color: "rgba(90,224,160,.6)",
+                        zIndex: 1,
                       }}
                     >
                       Reveal
