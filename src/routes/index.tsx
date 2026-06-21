@@ -233,12 +233,17 @@ function Showcase() {
         .sw-creative-card {
           cursor: pointer;
           transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.2);
         }
         .sw-creative-card:hover {
-          transform: translateY(-4px);
+          transform: translateY(-6px);
+          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         .sw-creative-card:active {
-          transform: translateY(-1px) scale(0.99);
+          transform: translateY(-2px) scale(0.98);
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
         }
       `}</style>
 
@@ -441,11 +446,7 @@ function Showcase() {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
-              gap: 2,
-              border: "1px solid rgba(245, 242, 237, 0.08)",
-              background: "rgba(245, 242, 237, 0.04)",
-              borderRadius: 12,
-              overflow: "hidden",
+              gap: 24,
             }}
           >
             {/* === CREATIVE 1: NOISE VS SILENCE === */}
@@ -701,13 +702,17 @@ function Showcase() {
                         textTransform: "uppercase",
                         letterSpacing: "0.08em",
                         fontWeight: 500,
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 3,
+                        flexShrink: 0,
                       }}
                     >
                       {typeof window !== "undefined" && window.innerWidth < 768 ? (
                         <Smartphone size={10} />
                       ) : (
                         <Monitor size={10} />
-                      )}{" "}
+                      )}
                       Full Screen
                     </span>
                   </div>
