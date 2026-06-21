@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import { X, Eye, Monitor, Smartphone, Volume2, VolumeX, ArrowUpRight } from "lucide-react";
 import kiaSyrosImgUrl from "../assets/kia-syros.png";
@@ -16,21 +15,6 @@ import thumb2Url from "../assets/08-d (3).avif";
 import thumb3Url from "../assets/08-d (4).avif";
 import thumb4Url from "../assets/08-d.avif";
 import pauseBgUrl from "../assets/syros-2.jpg";
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Noise Vs Silence — Creative Showcase" },
-      {
-        name: "description",
-        content: "Noise Vs Silence — A Kia Syros EV immersive brand experience.",
-      },
-      { property: "og:title", content: "Noise Vs Silence — Creative Showcase" },
-      { property: "og:description", content: "Explore our creative projects." },
-    ],
-  }),
-  component: Showcase,
-});
 
 const KIA_SYROS_IMG = kiaSyrosImgUrl;
 const ROAD_IMG = roadImgAsset.url;
@@ -101,7 +85,7 @@ function SoundWaveMini({ chaotic = false }: { chaotic?: boolean }) {
   );
 }
 
-function Showcase() {
+export default function Showcase() {
   const [selectedCreative, setSelectedCreative] = useState<number | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [animPhase, setAnimPhase] = useState<"enter" | "shown" | "exit">("enter");

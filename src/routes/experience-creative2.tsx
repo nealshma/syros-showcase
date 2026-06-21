@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import trafficAudioUrl from "../assets/traffic.mp3";
 import trafficVideoUrl from "../assets/traffic.mp4";
@@ -13,15 +12,7 @@ import thumb3Url from "../assets/08-d (4).avif";
 import thumb4Url from "../assets/08-d.avif";
 import pauseBgUrl from "../assets/syros-2.jpg";
 
-export const Route = createFileRoute("/experience-creative2")({
-  head: () => ({
-    meta: [
-      { title: "Kia Syros EV — The Silent Pause" },
-      { name: "description", content: "An immersive Rich Media experience for the Kia Syros EV." },
-    ],
-  }),
-  component: AdPage,
-});
+
 
 const TRAFFIC_AUDIO = trafficAudioUrl;
 const TRAFFIC_VIDEO = trafficVideoUrl;
@@ -38,7 +29,7 @@ const THUMB4 = thumb4Url;
 
 type Scene = "chaos" | "pause" | "reveal";
 
-function AdPage() {
+export default function AdPage() {
   const [scene, setScene] = useState<Scene>("chaos");
   const [started, setStarted] = useState(false);
   const [runKey, setRunKey] = useState(0);

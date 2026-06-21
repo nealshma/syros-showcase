@@ -1,4 +1,3 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import trafficAsset from "../assets/traffic.jpg.asset.json";
 import roadAsset from "../assets/road.jpg.asset.json";
@@ -9,20 +8,7 @@ import trafficAudioUrl from "../assets/traffic.mp3";
 import kiaSyrosImgUrl from "../assets/kia-syros.png";
 import kiaSyrosDriveUrl from "../assets/kia-syros-drive.mp4";
 
-export const Route = createFileRoute("/experience-creative1")({
-  head: () => ({
-    meta: [
-      { title: "Syros EV — Sound vs Silence" },
-      { name: "description", content: "Less Noise. More Journey. The silent power of Syros EV." },
-      { property: "og:title", content: "Syros EV — Sound vs Silence" },
-      {
-        property: "og:description",
-        content: "Less Noise. More Journey. The silent power of Syros EV.",
-      },
-    ],
-  }),
-  component: Index,
-});
+
 
 const TRAFFIC_IMG = trafficAsset.url;
 const ROAD_IMG = roadAsset.url;
@@ -107,7 +93,7 @@ function SoundWave({
   );
 }
 
-function Index() {
+export default function Index() {
   const [currentState, setCurrentState] = useState<number>(1);
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupZooming, setPopupZooming] = useState(false);
