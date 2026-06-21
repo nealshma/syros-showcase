@@ -62,6 +62,13 @@ function AdPage() {
     return () => clearInterval(interval);
   }, [scene, started]);
 
+  useEffect(() => {
+    if (!started) {
+      const t = setTimeout(start, 5000);
+      return () => clearTimeout(t);
+    }
+  }, [started]);
+
   const audioRef = useRef<HTMLAudioElement>(null);
   const peaceAudioRef = useRef<{
     ctx: AudioContext;
