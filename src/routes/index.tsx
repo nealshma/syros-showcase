@@ -20,12 +20,12 @@ import pauseBgUrl from "../assets/syros-2.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "NOISE VS SILENCE — Creative Showcase" },
+      { title: "Noise Vs Silence — Creative Showcase" },
       {
         name: "description",
-        content: "NOISE VS SILENCE — A Kia Syros EV immersive brand experience.",
+        content: "Noise Vs Silence — A Kia Syros EV immersive brand experience.",
       },
-      { property: "og:title", content: "NOISE VS SILENCE — Creative Showcase" },
+      { property: "og:title", content: "Noise Vs Silence — Creative Showcase" },
       { property: "og:description", content: "Explore our creative projects." },
     ],
   }),
@@ -378,7 +378,7 @@ function Showcase() {
                 maxWidth: 600,
               }}
             >
-              Explore our <span style={{ color: "#00D4AA" }}>creative work</span>
+              KIA Syros EV <span style={{ color: "#00D4AA" }}>— EV for Everyone</span>
             </h1>
             <p
               style={{
@@ -449,7 +449,7 @@ function Showcase() {
               gap: 24,
             }}
           >
-            {/* === CREATIVE 1: NOISE VS SILENCE === */}
+            {/* === CREATIVE 1: Noise Vs Silence === */}
             <div
               className="sw-creative-card"
               onClick={() => openCreative(1)}
@@ -725,7 +725,7 @@ function Showcase() {
                       color: "#F5F2ED",
                     }}
                   >
-                    NOISE VS SILENCE
+                    Noise Vs Silence
                   </h3>
                   <p
                     style={{
@@ -1135,7 +1135,7 @@ function Showcase() {
               color: "rgba(245, 242, 237, 0.3)",
             }}
           >
-            <span>NOISE VS SILENCE · Creative Showcase · {new Date().getFullYear()}</span>
+            <span>Noise Vs Silence · Creative Showcase · {new Date().getFullYear()}</span>
             <span>Kia Syros EV — Less Noise. More Journey.</span>
           </div>
         </footer>
@@ -1222,7 +1222,7 @@ function Showcase() {
                   }}
                 >
                   {selectedCreative === 1
-                    ? "NOISE VS SILENCE — Kia Syros EV"
+                    ? "Noise Vs Silence — Kia Syros EV"
                     : "The Silent Pause — Kia Syros EV"}
                 </span>
               </div>
@@ -1678,12 +1678,14 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
   const [started, setStarted] = useState(false);
   const [runKey, setRunKey] = useState(0);
   const [showReplay, setShowReplay] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
+  const [showDetails] = useState(true);
 
   useEffect(() => {
-    const t = setTimeout(() => setShowDetails(true), 1200);
-    return () => clearTimeout(t);
-  }, []);
+    if (!started) {
+      const t = setTimeout(start, 5000);
+      return () => clearTimeout(t);
+    }
+  }, [started]);
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const chaosVidRef = useRef<HTMLVideoElement>(null);
@@ -1717,7 +1719,7 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
         if (audioRef.current) audioRef.current.pause();
         if (chaosVidRef.current) chaosVidRef.current.pause();
         setScene("pause");
-      }, 4000),
+      }, 5000),
     );
 
     timers.current.push(
@@ -1788,16 +1790,15 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
           <div
             className="absolute inset-0"
             style={{
-              background:
-                "radial-gradient(ellipse at center, rgba(0,0,0,.2) 0%, rgba(0,0,0,.85) 100%)",
+              background: "radial-gradient(rgba(0,0,0,.2) 0%, rgba(0,0,0,.85) 100%)",
             }}
           />
           <div className="relative z-10 flex flex-col items-center">
             <img
               src={CAR_IMG}
               alt="Kia Syros"
-              className="w-[30%] mb-3 drop-shadow-2xl"
-              style={{ maxWidth: 140 }}
+              className="w-[90%] drop-shadow-2xl"
+              style={{ maxWidth: 420 }}
             />
             <div className="text-[9px] tracking-[.35em] text-white/60 mb-1">
               KIA SYROS EV · INTERACTIVE
@@ -2156,134 +2157,70 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
               ↻ Replay
             </button>
           )}
-
-          {showDetails && (
-            <div
-              style={{
-                position: "absolute",
-                bottom: 12,
-                left: "50%",
-                transform: "translateX(-50%)",
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
-                padding: "8px 16px",
-                borderRadius: 12,
-                background: "rgba(14, 14, 16, 0.85)",
-                backdropFilter: "blur(12px)",
-                border: "1px solid rgba(245, 242, 237, 0.08)",
-                zIndex: 5,
-                animation: "sc-fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 9,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.12em",
-                  color: "rgba(245, 242, 237, 0.5)",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                }}
-              >
-                <Monitor size={11} />
-                Full Screen
-              </div>
-              <div style={{ width: 1, height: 14, background: "rgba(245, 242, 237, 0.1)" }} />
-              <span
-                style={{
-                  fontSize: 10,
-                  color: "rgba(245, 242, 237, 0.7)",
-                  fontWeight: 500,
-                }}
-              >
-                The Silent Pause
-              </span>
-              <div style={{ width: 1, height: 14, background: "rgba(245, 242, 237, 0.1)" }} />
-              <a
-                href="/experience-creative2"
-                style={{
-                  fontSize: 9,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.12em",
-                  color: "#5AE0A0",
-                  textDecoration: "none",
-                  fontWeight: 600,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 4,
-                }}
-              >
-                View Full Experience <ArrowUpRight size={10} />
-              </a>
-            </div>
-          )}
-
-          {showDetails && (
-            <div
-              style={{
-                position: "absolute",
-                bottom: 12,
-                left: "50%",
-                transform: "translateX(-50%)",
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
-                padding: "8px 16px",
-                borderRadius: 12,
-                background: "rgba(14, 14, 16, 0.85)",
-                backdropFilter: "blur(12px)",
-                border: "1px solid rgba(245, 242, 237, 0.08)",
-                zIndex: 5,
-                animation: "sc-fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 9,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.12em",
-                  color: "rgba(245, 242, 237, 0.5)",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                }}
-              >
-                <Monitor size={11} />
-                Full Screen
-              </div>
-              <div style={{ width: 1, height: 14, background: "rgba(245, 242, 237, 0.1)" }} />
-              <span
-                style={{
-                  fontSize: 10,
-                  color: "rgba(245, 242, 237, 0.7)",
-                  fontWeight: 500,
-                }}
-              >
-                The Silent Pause
-              </span>
-              <div style={{ width: 1, height: 14, background: "rgba(245, 242, 237, 0.1)" }} />
-              <a
-                href="/experience-creative2"
-                style={{
-                  fontSize: 9,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.12em",
-                  color: "#5AE0A0",
-                  textDecoration: "none",
-                  fontWeight: 600,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 4,
-                }}
-              >
-                View Full Experience <ArrowUpRight size={10} />
-              </a>
-            </div>
-          )}
         </>
       )}
+
+      {/* Floating details bar — visible on intro screen and during experience */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 12,
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          alignItems: "center",
+          gap: 12,
+          padding: "8px 16px",
+          borderRadius: 12,
+          background: "rgba(14, 14, 16, 0.85)",
+          backdropFilter: "blur(12px)",
+          border: "1px solid rgba(245, 242, 237, 0.08)",
+          zIndex: 15,
+          animation: "sc-fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both",
+        }}
+      >
+        <div
+          style={{
+            fontSize: 9,
+            textTransform: "uppercase",
+            letterSpacing: "0.12em",
+            color: "rgba(245, 242, 237, 0.5)",
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+          }}
+        >
+          <Monitor size={11} />
+          Full Screen
+        </div>
+        <div style={{ width: 1, height: 14, background: "rgba(245, 242, 237, 0.1)" }} />
+        <span
+          style={{
+            fontSize: 10,
+            color: "rgba(245, 242, 237, 0.7)",
+            fontWeight: 500,
+          }}
+        >
+          The Silent Pause
+        </span>
+        <div style={{ width: 1, height: 14, background: "rgba(245, 242, 237, 0.1)" }} />
+        <a
+          href="/experience-creative2"
+          style={{
+            fontSize: 9,
+            textTransform: "uppercase",
+            letterSpacing: "0.12em",
+            color: "#5AE0A0",
+            textDecoration: "none",
+            fontWeight: 600,
+            display: "flex",
+            alignItems: "center",
+            gap: 4,
+          }}
+        >
+          View Full Experience <ArrowUpRight size={10} />
+        </a>
+      </div>
     </div>
   );
 }
