@@ -109,6 +109,8 @@ function Index() {
   const [popupVisible, setPopupVisible] = useState(false);
   const [popupZooming, setPopupZooming] = useState(false);
   const [soundOn, setSoundOn] = useState(true);
+  const [heroTextVisible, setHeroTextVisible] = useState(false);
+  const [heroTextExiting, setHeroTextExiting] = useState(false);
 
   const audioRef = useRef<{
     ctx: AudioContext;
@@ -148,6 +150,22 @@ function Index() {
       return () => clearTimeout(t);
     }
   }, [currentState]);
+
+  useEffect(() => {
+    if (currentState === 2) {
+      const tShow = setTimeout(() => setHeroTextVisible(true), 800);
+      return () => clearTimeout(tShow);
+    } else {
+      setHeroTextVisible(false);
+      setHeroTextExiting(false);
+    }
+  }, [currentState]);
+
+  useEffect(() => {
+    if (!heroTextVisible || currentState !== 2) return;
+    const tExit = setTimeout(() => setHeroTextExiting(true), 4000);
+    return () => clearTimeout(tExit);
+  }, [heroTextVisible, currentState]);
 
   // Auto-transition: 5s after popup appears, zoom popup to fullscreen, then go to state 3
   useEffect(() => {
@@ -339,8 +357,8 @@ function Index() {
           50% { transform: translateY(-6px); }
         }
         @keyframes sv-popup-glow {
-          0%, 100% { box-shadow: 0 12px 40px rgba(0,0,0,0.55), 0 0 0 1px rgba(0,212,170,0.4), 0 0 24px rgba(0,212,170,0.25); }
-          50% { box-shadow: 0 18px 60px rgba(0,0,0,0.65), 0 0 0 1px rgba(0,212,170,0.9), 0 0 48px rgba(0,212,170,0.55); }
+          0%, 100% { box-shadow: 0 14px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,212,170,0.5), 0 0 32px rgba(0,212,170,0.3), inset 0 0 30px rgba(0,212,170,0.05); }
+          50% { box-shadow: 0 20px 70px rgba(0,0,0,0.7), 0 0 0 1px rgba(0,212,170,1), 0 0 56px rgba(0,212,170,0.6), inset 0 0 40px rgba(0,212,170,0.1); }
         }
         @keyframes sv-syros-glide {
           0% { transform: translateX(-6px) scale(1); }
@@ -371,19 +389,58 @@ function Index() {
                      sv-popup-float 4s ease-in-out 1.2s infinite,
                      sv-popup-glow 2.6s ease-in-out 1.2s infinite;
         }
-        .sv-popup:hover .sv-popup-img { transform: scale(1.08); }
-        .sv-popup-img { transition: transform 0.6s ease; animation: sv-syros-glide 5s ease-in-out infinite; }
+        .sv-popup:hover .sv-popup-img { transform: scale(1.08); filter: brightness(1.1) contrast(1.05); }
+        .sv-popup-img { transition: transform 0.6s ease, filter 0.6s ease; animation: sv-syros-glide 5s ease-in-out infinite; }
+        @keyframes sv-popup-shimmer {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+        .sv-popup::before {
+          content: '';
+          position: absolute;
+          inset: -2px;
+          border-radius: inherit;
+          background: linear-gradient(135deg, rgba(0,212,170,0.5), rgba(0,212,170,0.1), rgba(0,212,170,0.5));
+          z-index: -1;
+          opacity: 0;
+          transition: opacity 0.4s ease;
+        }
+        .sv-popup:hover::before { opacity: 1; }
+        @keyframes sv-popup-particles {
+          0%, 100% { opacity: 0; transform: translateY(0) scale(0.8); }
+          50% { opacity: 1; transform: translateY(-8px) scale(1); }
+        }
+        @keyframes sv-hero-text-in {
+          from { opacity: 0; transform: translateY(40px) scale(0.9); filter: blur(8px); }
+          to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
+        }
+        @keyframes sv-hero-text-out {
+          from { opacity: 1; transform: translateX(0) scale(1); filter: blur(0px); }
+          to { opacity: 0; transform: translateX(60vw) scale(0.7); filter: blur(6px); }
+        }
+        @keyframes sv-hero-glow {
+          0%, 100% { text-shadow: 0 0 20px rgba(0,212,170,0.4), 0 2px 24px rgba(0,0,0,0.6); }
+          50% { text-shadow: 0 0 40px rgba(0,212,170,0.7), 0 2px 32px rgba(0,0,0,0.7); }
+        }
+        @keyframes sv-hero-line-in {
+          from { width: 0; opacity: 0; }
+          to { width: 80px; opacity: 1; }
+        }
+        @keyframes sv-hero-sub-in {
+          from { opacity: 0; transform: translateY(16px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
         .sv-popup-shine {
-          position: absolute; top: 0; left: 0; height: 100%; width: 40%;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
-          animation: sv-shine 2.8s ease-in-out 1.5s infinite;
+          position: absolute; top: 0; left: 0; height: 100%; width: 50%;
+          background: linear-gradient(90deg, transparent, rgba(0,212,170,0.2), rgba(255,255,255,0.4), rgba(0,212,170,0.2), transparent);
+          animation: sv-shine 3s ease-in-out 1.5s infinite;
           pointer-events: none;
+          z-index: 2;
         }
         .sv-headline { animation: sv-fade-up 0.9s ease-out 0.5s both; }
         .sv-subhead { animation: sv-fade-up 0.9s ease-out 0.9s both; }
         .sv-logo { animation: sv-fade 0.8s ease-out 1.2s both; }
         .sv-cta { animation: sv-fade-up 0.9s ease-out 1.4s both; }
-        .sv-bottom-wave { animation: sv-breath 3s ease-in-out infinite; }
         .sv-cta-primary:hover { filter: brightness(1.1); }
         .sv-cta-ghost { transition: all 0.25s ease; }
         .sv-cta-ghost:hover { background: #fff; color: #0A1420; }
@@ -553,55 +610,75 @@ function Index() {
               bottom: popupZooming ? 0 : 24,
               left: popupZooming ? 0 : "auto",
               top: popupZooming ? 0 : "auto",
-              width: popupZooming ? "100vw" : 320,
+              width: popupZooming ? "100vw" : 340,
               height: popupZooming ? "100vh" : "auto",
               padding: 0,
-              background: "rgba(10, 20, 30, 0.92)",
-              border: popupZooming ? "1px solid rgba(0,212,170,0)" : "1px solid #00D4AA",
-              borderRadius: popupZooming ? 0 : 16,
+              background: "linear-gradient(145deg, rgba(10,20,30,0.95), rgba(5,15,25,0.98))",
+              border: popupZooming ? "1px solid rgba(0,212,170,0)" : "1px solid rgba(0,212,170,0.6)",
+              borderRadius: popupZooming ? 0 : 20,
               overflow: "hidden",
               cursor: "pointer",
               textAlign: "left",
               zIndex: popupZooming ? 30 : 5,
-              backdropFilter: "blur(8px)",
-              transition:
-                "all 1.1s cubic-bezier(0.7, 0, 0.2, 1)",
+              backdropFilter: "blur(12px)",
+              boxShadow: popupZooming ? "none" : "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,212,170,0.1), inset 0 1px 0 rgba(255,255,255,0.05)",
+              transition: "all 1.1s cubic-bezier(0.7, 0, 0.2, 1)",
               transform: popupZooming ? "scale(1)" : undefined,
             }}
           >
             <span className="sv-popup-shine" />
             <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: 220,
+                background: "linear-gradient(180deg, rgba(0,212,170,0.15) 0%, transparent 60%)",
+                pointerEvents: "none",
+                zIndex: 1,
+              }}
+            />
+            <div
               className="sv-popup-img"
               style={{
                 width: "100%",
-                height: popupZooming ? "100vh" : 170,
-                backgroundImage: `linear-gradient(180deg, rgba(8,16,24,0.0) 40%, rgba(8,16,24,0.55) 100%), url('${KIA_SYROS_IMG}'), url('${ROAD_IMG}')`,
+                height: popupZooming ? "100vh" : 210,
+                backgroundImage: `linear-gradient(180deg, rgba(8,16,24,0.0) 30%, rgba(8,16,24,0.6) 100%), url('${KIA_SYROS_IMG}'), url('${ROAD_IMG}')`,
                 backgroundSize: "contain, cover, cover",
                 backgroundRepeat: "no-repeat, no-repeat, no-repeat",
                 backgroundPosition: "center, center, center",
                 backgroundColor: "#0A1420",
                 transition: "height 1.1s cubic-bezier(0.7, 0, 0.2, 1)",
+                position: "relative",
               }}
             />
             <div
               style={{
-                padding: popupZooming ? "0" : "14px 16px 16px",
+                padding: popupZooming ? "0" : "16px 18px 18px",
                 display: popupZooming ? "none" : "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                gap: 10,
+                gap: 12,
+                borderTop: "1px solid rgba(0,212,170,0.15)",
               }}
             >
-              <span style={{ color: "#fff", fontSize: 14, fontWeight: 500 }}>
-                Escape the chaos →
-              </span>
+              <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                <span style={{ color: "#fff", fontSize: 15, fontWeight: 600, letterSpacing: 0.3 }}>
+                  Escape the chaos
+                </span>
+                <span style={{ color: "rgba(0,212,170,0.8)", fontSize: 11, letterSpacing: 1.5, textTransform: "uppercase" }}>
+                  Experience serenity →
+                </span>
+              </div>
               <span
                 className="sv-pulse-dot"
                 style={{
-                  width: 11,
-                  height: 11,
+                  width: 12,
+                  height: 12,
                   borderRadius: "50%",
                   background: "#00D4AA",
+                  boxShadow: "0 0 12px rgba(0,212,170,0.5)",
                   flexShrink: 0,
                 }}
               />
@@ -758,6 +835,74 @@ function Index() {
         />
       )}
 
+      {/* Hero text — "Ready for Syros EV for Everyone" */}
+      {currentState === 2 && heroTextVisible && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: `${leftWidth}%`,
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 8,
+            pointerEvents: "none",
+            transition: "width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          }}
+        >
+          <div
+            style={{
+              animation: heroTextExiting
+                ? "sv-hero-text-out 1.2s cubic-bezier(0.7, 0, 0.2, 1) forwards"
+                : "sv-hero-text-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both",
+              textAlign: "center",
+              padding: "0 40px",
+            }}
+          >
+            <div
+              style={{
+                fontSize: 14,
+                letterSpacing: 6,
+                textTransform: "uppercase",
+                color: "#00D4AA",
+                fontWeight: 500,
+                marginBottom: 16,
+                animation: heroTextExiting ? "none" : "sv-hero-sub-in 0.7s ease-out 0.3s both",
+              }}
+            >
+              Introducing
+            </div>
+            <h2
+              style={{
+                fontSize: 44,
+                fontWeight: 700,
+                color: "#fff",
+                margin: 0,
+                lineHeight: 1.15,
+                letterSpacing: "-0.5px",
+                animation: heroTextExiting ? "none" : "sv-hero-glow 3s ease-in-out 0.8s infinite",
+              }}
+            >
+              Ready for Syros EV
+              <br />
+              <span style={{ color: "#00D4AA" }}>for Everyone</span>
+            </h2>
+            <div
+              style={{
+                width: 80,
+                height: 2,
+                background: "linear-gradient(90deg, transparent, #00D4AA, transparent)",
+                margin: "20px auto 0",
+                animation: heroTextExiting ? "none" : "sv-hero-line-in 0.6s ease-out 0.5s both",
+              }}
+            />
+          </div>
+        </div>
+      )}
+
       {/* STATE 3 overlay content */}
       {currentState === 3 && (
         <div
@@ -769,7 +914,7 @@ function Index() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "flex-start",
-            paddingTop: "22vh",
+            paddingTop: "16vh",
             color: "#fff",
           }}
         >
@@ -821,10 +966,11 @@ function Index() {
           <div
             className="sv-cta"
             style={{
-              marginTop: 40,
+              marginTop: "auto",
               display: "flex",
               alignItems: "center",
               gap: 18,
+              marginBottom: 80,
             }}
           >
             <button
@@ -863,29 +1009,7 @@ function Index() {
             </button>
           </div>
 
-          {/* Bottom peaceful wave */}
-          <div
-            className="sv-bottom-wave"
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              bottom: "10%",
-              display: "flex",
-              justifyContent: "center",
-              animation: "sv-fade 1.2s ease-out 1s both, sv-breath 3s ease-in-out 1s infinite",
-            }}
-          >
-            <SoundWave
-              count={1}
-              amplitude={8}
-              speed={6}
-              color="#00D4AA"
-              opacity={0.9}
-              width={Math.min(1200, typeof window !== "undefined" ? window.innerWidth * 0.7 : 900)}
-              height={60}
-            />
-          </div>
+
         </div>
       )}
     </div>
