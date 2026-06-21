@@ -98,6 +98,7 @@ function Showcase() {
   const [modalVisible, setModalVisible] = useState(false);
   const [animPhase, setAnimPhase] = useState<"enter" | "shown" | "exit">("enter");
   const [soundOn, setSoundOn] = useState(true);
+  const trafficAudioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     if (modalVisible) {
@@ -117,13 +118,46 @@ function Showcase() {
     };
   }, [modalVisible]);
 
+  useEffect(() => {
+    if (!trafficAudioRef.current) return;
+    trafficAudioRef.current.volume = soundOn ? 0.4 : 0;
+  }, [soundOn]);
+
+  useEffect(() => {
+    return () => {
+      if (trafficAudioRef.current) {
+        trafficAudioRef.current.pause();
+        trafficAudioRef.current.src = "";
+        trafficAudioRef.current = null;
+      }
+    };
+  }, []);
+
+  const initTrafficAudio = () => {
+    if (trafficAudioRef.current) return;
+    const el = new Audio(TRAFFIC_AUDIO);
+    el.loop = true;
+    el.volume = 0.4;
+    trafficAudioRef.current = el;
+    const resume = () => el.play().catch(() => {});
+    resume();
+    document.addEventListener("click", resume, { once: true });
+    document.addEventListener("touchstart", resume, { once: true });
+  };
+
   const openCreative = (id: number) => {
     setSelectedCreative(id);
+    if (id === 1) initTrafficAudio();
     setModalVisible(true);
   };
 
   const closeCreative = () => {
     setAnimPhase("exit");
+    if (trafficAudioRef.current) {
+      trafficAudioRef.current.pause();
+      trafficAudioRef.current.src = "";
+      trafficAudioRef.current = null;
+    }
     setTimeout(() => {
       setModalVisible(false);
       setSelectedCreative(null);
@@ -1093,37 +1127,11 @@ function Showcase() {
 
 function Creative1Full({ soundOn }: { soundOn: boolean }) {
   const [showDetails, setShowDetails] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     const t = setTimeout(() => setShowDetails(true), 800);
     return () => clearTimeout(t);
   }, []);
-
-  useEffect(() => {
-    const el = new Audio(TRAFFIC_AUDIO);
-    el.loop = true;
-    el.volume = 0.4;
-    audioRef.current = el;
-    const resume = () => {
-      el.play().catch(() => {});
-    };
-    resume();
-    document.addEventListener("click", resume, { once: true });
-    document.addEventListener("touchstart", resume, { once: true });
-    return () => {
-      document.removeEventListener("click", resume);
-      document.removeEventListener("touchstart", resume);
-      el.pause();
-      el.src = "";
-      audioRef.current = null;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!audioRef.current) return;
-    audioRef.current.volume = soundOn ? 0.4 : 0;
-  }, [soundOn]);
 
   return (
     <div
