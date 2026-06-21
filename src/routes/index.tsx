@@ -1185,7 +1185,7 @@ export default function Showcase() {
               color: "rgba(245, 242, 237, 0.3)",
             }}
           >
-            <span>Noise Vs Silence · Creative Showcase · {new Date().getFullYear()}</span>
+            <span>KIA Syros EV · Creative Showcase · {new Date().getFullYear()}</span>
             <span>Kia Syros EV — Less Noise. More Journey.</span>
           </div>
         </footer>
@@ -1272,8 +1272,8 @@ export default function Showcase() {
                   }}
                 >
                   {selectedCreative === 1
-                    ? "Noise Vs Silence — Kia Syros EV"
-                    : "The Silent Pause — Kia Syros EV"}
+                    ? "Noise vs Silence — KIA Syros EV"
+                    : "The Silent Pause — KIA Syros EV"}
                 </span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
