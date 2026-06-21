@@ -1,22 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
-import {
-  X,
-  Eye,
-  Monitor,
-  Smartphone,
-  Zap,
-  Volume2,
-  VolumeX,
-  ArrowUpRight,
-  Sparkles,
-} from "lucide-react";
+import { X, Eye, Monitor, Smartphone, Zap, Volume2, VolumeX, ArrowUpRight } from "lucide-react";
 import kiaSyrosImgUrl from "../assets/kia-syros.png";
 import roadImgAsset from "../assets/road.jpg.asset.json";
 import trafficImgAsset from "../assets/traffic.jpg.asset.json";
 import trafficVideoUrl from "../assets/traffic.mp4";
 import kiaSyrosDriveUrl from "../assets/kia-syros-drive.mp4";
 import trafficAudioUrl from "../assets/traffic.mp3";
+import carDriveVideoAsset from "../assets/syros-car-drive.mp4.asset.json";
+import carImgUrl from "../assets/syros-car.png";
+import heroImgUrl from "../assets/syros-hero.jpg";
+import lampsImgUrl from "../assets/syros-lamps.jpg";
+import thumb1Url from "../assets/08-d (1).avif";
+import thumb2Url from "../assets/08-d (3).avif";
+import thumb3Url from "../assets/08-d (4).avif";
+import thumb4Url from "../assets/08-d.avif";
+import pauseBgUrl from "../assets/syros-2.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -39,6 +38,15 @@ const TRAFFIC_IMG = trafficImgAsset.url;
 const TRAFFIC_VIDEO = trafficVideoUrl;
 const ROAD_VIDEO = kiaSyrosDriveUrl;
 const TRAFFIC_AUDIO = trafficAudioUrl;
+const CAR_DRIVE_VIDEO = carDriveVideoAsset.url;
+const CAR_IMG = carImgUrl;
+const HERO_IMG = heroImgUrl;
+const LAMPS_IMG = lampsImgUrl;
+const THUMB1 = thumb1Url;
+const THUMB2 = thumb2Url;
+const THUMB3 = thumb3Url;
+const THUMB4 = thumb4Url;
+const PAUSE_BG = pauseBgUrl;
 
 function SoundWaveMini({ chaotic = false }: { chaotic?: boolean }) {
   const width = 200;
@@ -222,10 +230,6 @@ function Showcase() {
           0%, 100% { transform: scaleY(0.3); }
           50% { transform: scaleY(1); }
         }
-        @keyframes sw-coming-soon-pulse {
-          0%, 100% { opacity: 0.6; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.05); }
-        }
         .sw-creative-card {
           cursor: pointer;
           transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -298,21 +302,37 @@ function Showcase() {
               Showcase
             </span>
           </a>
-          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <a
-              href="/experience"
+              href="/experience-creative1"
               style={{
-                fontSize: 12,
+                fontSize: 11,
                 color: "rgba(245, 242, 237, 0.6)",
                 textDecoration: "none",
                 textTransform: "uppercase",
-                letterSpacing: "0.15em",
+                letterSpacing: "0.12em",
                 transition: "color 0.2s",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#F5F2ED")}
               onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245, 242, 237, 0.6)")}
             >
-              Full Experience
+              Creative 01
+            </a>
+            <span style={{ fontSize: 10, color: "rgba(245, 242, 237, 0.2)" }}>·</span>
+            <a
+              href="/experience-creative2"
+              style={{
+                fontSize: 11,
+                color: "rgba(245, 242, 237, 0.6)",
+                textDecoration: "none",
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                transition: "color 0.2s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#F5F2ED")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(245, 242, 237, 0.6)")}
+            >
+              Creative 02
             </a>
           </div>
         </div>
@@ -670,8 +690,7 @@ function Showcase() {
                         fontWeight: 500,
                         fontStyle: "italic",
                       }}
-                    >
-                    </span>
+                    ></span>
                     <span
                       style={{
                         fontSize: 9,
@@ -751,7 +770,7 @@ function Showcase() {
               </div>
             </div>
 
-            {/* === CREATIVE 2: Coming Soon === */}
+            {/* === CREATIVE 2: The Silent Pause === */}
             <div
               className="sw-creative-card"
               onClick={() => openCreative(2)}
@@ -765,94 +784,149 @@ function Showcase() {
               <div
                 style={{
                   height: 220,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  background: "linear-gradient(135deg, #1A1A1E 0%, #141416 100%)",
                   position: "relative",
                   overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
-                {/* Decorative circles */}
+                {/* Three small scene previews */}
+                <div style={{ display: "flex", flex: 1 }}>
+                  <div
+                    style={{
+                      flex: 1,
+                      background: "linear-gradient(135deg, rgba(200,40,40,.25), rgba(0,0,0,.8))",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      position: "relative",
+                    }}
+                  >
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#FFB400"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                    </svg>
+                    <span
+                      style={{
+                        position: "absolute",
+                        bottom: 6,
+                        fontSize: 7,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.12em",
+                        color: "rgba(255,180,0,.6)",
+                      }}
+                    >
+                      Chaos
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      flex: 1,
+                      background: "linear-gradient(135deg, rgba(0,229,160,.15), rgba(0,0,0,.8))",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      position: "relative",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: 18,
+                        fontWeight: 900,
+                        color: "rgba(0,229,160,.5)",
+                        letterSpacing: "0.1em",
+                      }}
+                    >
+                      — —
+                    </span>
+                    <span
+                      style={{
+                        position: "absolute",
+                        bottom: 6,
+                        fontSize: 7,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.12em",
+                        color: "rgba(0,229,160,.6)",
+                      }}
+                    >
+                      Pause
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      flex: 1,
+                      background: "linear-gradient(135deg, rgba(90,224,160,.2), rgba(0,0,0,.8))",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      position: "relative",
+                    }}
+                  >
+                    <span style={{ fontSize: 12, fontWeight: 700, color: "rgba(90,224,160,.5)" }}>
+                      EV
+                    </span>
+                    <span
+                      style={{
+                        position: "absolute",
+                        bottom: 6,
+                        fontSize: 7,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.12em",
+                        color: "rgba(90,224,160,.6)",
+                      }}
+                    >
+                      Reveal
+                    </span>
+                  </div>
+                </div>
+                {/* Hover overlay */}
                 <div
                   style={{
                     position: "absolute",
-                    width: 200,
-                    height: 200,
-                    borderRadius: "50%",
-                    border: "1px solid rgba(245, 242, 237, 0.04)",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
+                    inset: 0,
+                    background: "rgba(0, 212, 170, 0)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    opacity: 0,
+                    transition: "opacity 0.3s ease, background 0.3s ease",
                   }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    width: 140,
-                    height: 140,
-                    borderRadius: "50%",
-                    border: "1px solid rgba(245, 242, 237, 0.03)",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    width: 80,
-                    height: 80,
-                    borderRadius: "50%",
-                    border: "1px solid rgba(245, 242, 237, 0.02)",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                  }}
-                />
-                {/* Animated dot */}
-                <div
-                  style={{
-                    width: 12,
-                    height: 12,
-                    borderRadius: "50%",
-                    background: "#00D4AA",
-                    boxShadow: "0 0 20px rgba(0, 212, 170, 0.3)",
-                    animation: "sw-pulse-ring 2s ease-in-out infinite",
-                    marginBottom: 16,
-                  }}
-                />
-                <Sparkles
-                  size={24}
-                  style={{
-                    color: "rgba(245, 242, 237, 0.15)",
-                    marginBottom: 10,
-                  }}
-                />
-                <h3
-                  style={{
-                    fontSize: 20,
-                    fontWeight: 700,
-                    margin: 0,
-                    letterSpacing: "-0.3px",
-                    color: "rgba(245, 242, 237, 0.6)",
-                    animation: "sw-coming-soon-pulse 3s ease-in-out infinite",
-                  }}
+                  className="sw-creative-overlay-2"
                 >
-                  Coming Soon
-                </h3>
-                <p
-                  style={{
-                    fontSize: 11,
-                    color: "rgba(245, 242, 237, 0.3)",
-                    margin: "8px 0 0",
-                    letterSpacing: "0.12em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  Next creative in progress
-                </p>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 6,
+                      padding: "8px 16px",
+                      borderRadius: 999,
+                      background: "rgba(90, 224, 160, 0.9)",
+                      color: "#0E0E10",
+                      fontSize: 11,
+                      fontWeight: 600,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.12em",
+                    }}
+                  >
+                    <Eye size={13} />
+                    Preview
+                  </div>
+                </div>
+                <style>{`
+                  .sw-creative-card:hover .sw-creative-overlay-2 {
+                    opacity: 1 !important;
+                    background: rgba(0, 0, 0, 0.5) !important;
+                  }
+                `}</style>
               </div>
               <div
                 style={{
@@ -888,14 +962,14 @@ function Showcase() {
                         fontSize: 9,
                         padding: "2px 6px",
                         borderRadius: 4,
-                        background: "rgba(245, 242, 237, 0.08)",
-                        color: "rgba(245, 242, 237, 0.4)",
+                        background: "rgba(90, 224, 160, 0.15)",
+                        color: "#5AE0A0",
                         textTransform: "uppercase",
                         letterSpacing: "0.08em",
                         fontWeight: 500,
                       }}
                     >
-                      Upcoming
+                      13-Second Story
                     </span>
                   </div>
                   <h3
@@ -904,29 +978,55 @@ function Showcase() {
                       fontWeight: 700,
                       margin: 0,
                       letterSpacing: "-0.3px",
-                      color: "rgba(245, 242, 237, 0.5)",
+                      color: "#F5F2ED",
                     }}
                   >
-                    Untitled Creative
+                    The Silent Pause
                   </h3>
                   <p
                     style={{
                       fontSize: 12,
-                      color: "rgba(245, 242, 237, 0.35)",
+                      color: "rgba(245, 242, 237, 0.5)",
                       margin: "4px 0 0",
+                      lineHeight: 1.4,
                     }}
                   >
-                    A new immersive experience is being crafted
+                    Kia Syros EV — City chaos to silent serenity
                   </p>
                 </div>
                 <ArrowUpRight
                   size={16}
                   style={{
-                    color: "rgba(245, 242, 237, 0.2)",
+                    color: "rgba(245, 242, 237, 0.3)",
                     flexShrink: 0,
                     marginTop: 2,
                   }}
                 />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  gap: 4,
+                  padding: "0 18px 16px",
+                  flexWrap: "wrap",
+                }}
+              >
+                {["Cinematic", "Audio", "3-Act Story", "Thumbnails"].map((tag) => (
+                  <span
+                    key={tag}
+                    style={{
+                      fontSize: 9,
+                      padding: "3px 8px",
+                      borderRadius: 4,
+                      background: "rgba(245, 242, 237, 0.06)",
+                      color: "rgba(245, 242, 237, 0.5)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.08em",
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -1039,7 +1139,9 @@ function Showcase() {
                     color: "rgba(245, 242, 237, 0.7)",
                   }}
                 >
-                  {selectedCreative === 1 ? "NOISE VS SILENCE — Kia Syros EV" : "Coming Soon"}
+                  {selectedCreative === 1
+                    ? "NOISE VS SILENCE — Kia Syros EV"
+                    : "The Silent Pause — Kia Syros EV"}
                 </span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -1114,7 +1216,7 @@ function Showcase() {
               {selectedCreative === 1 ? (
                 <Creative1Full soundOn={soundOn} />
               ) : (
-                <Creative2ComingSoon />
+                <Creative2Full soundOn={soundOn} />
               )}
             </div>
           </div>
@@ -1413,7 +1515,7 @@ function Creative1Full({ soundOn }: { soundOn: boolean }) {
           </span>
           <div style={{ width: 1, height: 16, background: "rgba(245, 242, 237, 0.1)" }} />
           <a
-            href="/experience"
+            href="/experience-creative1"
             style={{
               fontSize: 10,
               textTransform: "uppercase",
@@ -1487,127 +1589,619 @@ function SoundWaveFull({ chaotic = false, color }: { chaotic?: boolean; color: s
   );
 }
 
-function Creative2ComingSoon() {
+type Scene = "chaos" | "pause" | "reveal";
+
+function Creative2Full({ soundOn }: { soundOn: boolean }) {
+  const [scene, setScene] = useState<Scene>("chaos");
+  const [started, setStarted] = useState(false);
+  const [runKey, setRunKey] = useState(0);
+  const [showReplay, setShowReplay] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setShowDetails(true), 1200);
+    return () => clearTimeout(t);
+  }, []);
+
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const chaosVidRef = useRef<HTMLVideoElement>(null);
+  const driveVidRef = useRef<HTMLVideoElement>(null);
+  const carVidRef = useRef<HTMLVideoElement>(null);
+  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  const clearTimers = () => {
+    timers.current.forEach(clearTimeout);
+    timers.current = [];
+  };
+
+  const start = async () => {
+    setStarted(true);
+    setScene("chaos");
+    setShowReplay(false);
+    try {
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.volume = soundOn ? 0.9 : 0;
+        await audioRef.current.play();
+      }
+      if (chaosVidRef.current) {
+        chaosVidRef.current.currentTime = 0;
+        await chaosVidRef.current.play();
+      }
+    } catch {}
+
+    timers.current.push(
+      setTimeout(() => {
+        if (audioRef.current) audioRef.current.pause();
+        if (chaosVidRef.current) chaosVidRef.current.pause();
+        setScene("pause");
+      }, 4000),
+    );
+
+    timers.current.push(
+      setTimeout(() => {
+        setScene("reveal");
+        if (driveVidRef.current) {
+          driveVidRef.current.currentTime = 0;
+          driveVidRef.current.play().catch(() => {});
+        }
+        if (carVidRef.current) {
+          carVidRef.current.currentTime = 0;
+          carVidRef.current.play().catch(() => {});
+        }
+      }, 6500),
+    );
+
+    timers.current.push(setTimeout(() => setShowReplay(true), 13000));
+  };
+
+  useEffect(() => {
+    if (!audioRef.current) return;
+    audioRef.current.volume = soundOn ? 0.9 : 0;
+  }, [soundOn]);
+
+  const replay = () => {
+    clearTimers();
+    setRunKey((k) => k + 1);
+    setTimeout(start, 50);
+  };
+
+  useEffect(() => () => clearTimers(), []);
+
   return (
     <div
+      className="ad-stage relative w-full h-full overflow-hidden"
       style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 24,
-        padding: 40,
-        textAlign: "center",
-        width: "100%",
-        height: "100%",
-        background: "linear-gradient(135deg, #1A1A1E 0%, #141416 100%)",
+        background: "#000",
+        fontFamily: "ui-sans-serif, system-ui, -apple-system, sans-serif",
       }}
+      key={runKey}
     >
-      <div
-        style={{
-          position: "relative",
-          width: 80,
-          height: 80,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            borderRadius: "50%",
-            border: "2px solid rgba(0, 212, 170, 0.15)",
-            animation: "sw-pulse-ring 2.5s ease-in-out infinite",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            inset: 10,
-            borderRadius: "50%",
-            border: "1px solid rgba(0, 212, 170, 0.1)",
-            animation: "sw-pulse-ring 2.5s ease-in-out infinite 0.3s",
-          }}
-        />
-        <Sparkles size={36} style={{ color: "rgba(0, 212, 170, 0.4)" }} />
-      </div>
+      <style>{`
+        @keyframes sc-shakeX { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-3px)} 75%{transform:translateX(3px)} }
+        @keyframes sc-hornPulse { 0%,100%{opacity:0} 50%{opacity:1} }
+        @keyframes sc-fadeUp { from{opacity:0; transform:translateY(16px)} to{opacity:1; transform:translateY(0)} }
+        @keyframes sc-fadeIn { from{opacity:0} to{opacity:1} }
+        @keyframes sc-waveBeat { 0%,100%{transform:scaleY(.3)} 50%{transform:scaleY(1)} }
+        @keyframes sc-kenBurns { from{transform:scale(1) translateY(0)} to{transform:scale(1.12) translateY(-3%)} }
+        @keyframes sc-shootingStar { 0%{transform:translateX(0) translateY(0); opacity:1} 100%{transform:translateX(-80px) translateY(40px); opacity:0} }
+        @keyframes sc-pulseDot { 0%,100%{opacity:.3; transform:scale(1)} 50%{opacity:1; transform:scale(1.6)} }
+        @keyframes sc-progressFill { 0%{width:0%} 100%{width:100%} }
+        @keyframes sc-carDrift { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+      `}</style>
 
-      <div>
-        <h2
-          style={{
-            fontSize: 28,
-            fontWeight: 700,
-            color: "#F5F2ED",
-            margin: 0,
-            letterSpacing: "-0.5px",
-          }}
-        >
-          Coming Soon
-        </h2>
-        <p
-          style={{
-            fontSize: 14,
-            color: "rgba(245, 242, 237, 0.5)",
-            marginTop: 10,
-            maxWidth: 400,
-            lineHeight: 1.6,
-          }}
-        >
-          A new creative project is being crafted with care. We're exploring fresh ideas and
-          immersive experiences. Stay tuned for something exciting.
-        </p>
-      </div>
+      <audio ref={audioRef} src={TRAFFIC_AUDIO} loop preload="auto" />
 
-      <div
-        style={{
-          display: "flex",
-          gap: 8,
-          marginTop: 8,
-        }}
-      >
-        {["Immersive", "Interactive", "Innovative"].map((word) => (
-          <span
-            key={word}
+      {!started && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10 overflow-hidden">
+          <img
+            src={HERO_IMG}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
             style={{
-              fontSize: 9,
-              padding: "4px 12px",
-              borderRadius: 6,
-              background: "rgba(245, 242, 237, 0.06)",
-              color: "rgba(245, 242, 237, 0.3)",
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
+              animation: "sc-kenBurns 8s ease-in-out infinite alternate",
+              filter: "brightness(.45)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, rgba(0,0,0,.2) 0%, rgba(0,0,0,.85) 100%)",
+            }}
+          />
+          <div className="relative z-10 flex flex-col items-center">
+            <img
+              src={CAR_IMG}
+              alt="Kia Syros"
+              className="w-[30%] mb-3 drop-shadow-2xl"
+              style={{ maxWidth: 140 }}
+            />
+            <div className="text-[9px] tracking-[.35em] text-white/60 mb-1">
+              KIA SYROS EV · INTERACTIVE
+            </div>
+            <h2 className="text-white text-2xl font-extrabold mb-2">The Silent Pause</h2>
+            <p className="text-white/70 text-xs mb-4 max-w-xs">A 13-second immersive experience.</p>
+            <button
+              onClick={start}
+              className="inline-flex items-center gap-2 bg-[#5AE0A0] text-black font-semibold px-5 py-2.5 rounded-full hover:bg-white transition-colors text-sm"
+            >
+              ▶ Play with sound
+            </button>
+            <div className="text-white/40 text-[9px] mt-3">🔊 Audio required</div>
+          </div>
+        </div>
+      )}
+
+      {started && (
+        <>
+          {/* SCENE 1 — CHAOS */}
+          <div
+            className="absolute inset-0"
+            style={{
+              opacity: scene === "chaos" ? 1 : 0,
+              transition: "opacity 0.3s",
+              pointerEvents: scene === "chaos" ? "auto" : "none",
             }}
           >
-            {word}
-          </span>
-        ))}
-      </div>
+            <video
+              ref={chaosVidRef}
+              src={TRAFFIC_VIDEO}
+              muted
+              playsInline
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ filter: "brightness(.5) contrast(1.15) saturate(1.1)" }}
+            />
+            <div
+              className="absolute inset-x-0 top-0 h-1/3 opacity-60 mix-blend-screen"
+              style={{
+                backgroundImage: `url(${LAMPS_IMG})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                maskImage: "linear-gradient(180deg, rgba(0,0,0,.9), transparent)",
+                WebkitMaskImage: "linear-gradient(180deg, rgba(0,0,0,.9), transparent)",
+              }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% 60%, rgba(0,0,0,0) 0%, rgba(0,0,0,.65) 100%)",
+              }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(200,40,40,.12) 0%, rgba(200,40,40,0) 40%, rgba(0,0,0,0) 60%, rgba(0,0,0,.5) 100%)",
+              }}
+            />
+            <div
+              className="absolute inset-0 opacity-30 mix-blend-overlay"
+              style={{
+                background:
+                  "repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(255,255,255,.03) 4px, rgba(255,255,255,.03) 5px)",
+              }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background: "linear-gradient(0deg, rgba(255,140,0,.06) 0%, rgba(255,140,0,0) 50%)",
+                animation: scene === "chaos" ? "sc-hornPulse 2s ease-in-out infinite" : "none",
+              }}
+            />
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#FFB400"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{
+                  filter: "drop-shadow(0 0 14px rgba(255,180,0,.6))",
+                  animation: scene === "chaos" ? "sc-shakeX .15s infinite" : "none",
+                }}
+              >
+                <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+              </svg>
+            </div>
+            {[
+              { l: "10%", t: "28%", d: "0s" },
+              { l: "75%", t: "22%", d: ".4s" },
+              { l: "68%", t: "68%", d: ".8s" },
+            ].map((p, i) => (
+              <div
+                key={i}
+                className="absolute text-[#FFB400] font-black tracking-wider select-none"
+                style={{
+                  left: p.l,
+                  top: p.t,
+                  fontSize: 22,
+                  textShadow: "0 0 14px rgba(255,180,0,.7)",
+                  animation: `sc-hornPulse 1.4s ${p.d} infinite`,
+                }}
+              >
+                HONK!
+              </div>
+            ))}
+            <div className="absolute left-0 right-0 top-4 px-6 text-center">
+              <div className="text-[9px] tracking-[.25em] text-white/70 mb-1">KIA SYROS EV</div>
+              <h1
+                className="text-white font-extrabold text-xl leading-tight"
+                style={{ textShadow: "0 2px 14px rgba(0,0,0,.8)" }}
+              >
+                Ready for a different kind of drive?
+              </h1>
+            </div>
+            <div className="absolute bottom-3 left-4 flex items-end gap-[2px] h-5">
+              {Array.from({ length: 10 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="w-[2px] bg-[#FFB400] rounded-sm"
+                  style={{
+                    height: 20,
+                    transformOrigin: "bottom",
+                    animation: `sc-waveBeat ${0.4 + (i % 4) * 0.12}s ${i * 0.05}s infinite`,
+                  }}
+                />
+              ))}
+              <span className="text-white/70 text-[9px] ml-2">🔊 SOUND ON</span>
+            </div>
+          </div>
 
-      <div
-        style={{
-          marginTop: 8,
-          display: "flex",
-          alignItems: "center",
-          gap: 4,
-          fontSize: 11,
-          color: "rgba(245, 242, 237, 0.2)",
-          textTransform: "uppercase",
-          letterSpacing: "0.15em",
-        }}
-      >
-        <div
-          style={{
-            width: 5,
-            height: 5,
-            borderRadius: "50%",
-            background: "#00D4AA",
-            animation: "sw-pulse-ring 2s ease-in-out infinite",
-          }}
-        />
-        In development
-      </div>
+          {/* SCENE 2 — PAUSE */}
+          <div
+            className="absolute inset-0"
+            style={{
+              opacity: scene === "pause" ? 1 : 0,
+              transition: "opacity 0.2s",
+              pointerEvents: scene === "pause" ? "auto" : "none",
+            }}
+          >
+            <img src={PAUSE_BG} alt="" className="absolute inset-0 w-full h-full object-cover" />
+            <div
+              className="absolute inset-0"
+              style={{
+                background: "linear-gradient(180deg, transparent 60%, rgba(0,0,0,.7) 100%)",
+              }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% 50%, transparent 60%, rgba(0,0,0,.3) 100%)",
+              }}
+            />
+            <div
+              className="absolute w-[2px] h-[2px] bg-white rounded-full"
+              style={{
+                top: "12%",
+                left: "70%",
+                boxShadow: "0 0 5px #fff",
+                animation: "sc-shootingStar 2s ease-out 0.5s infinite",
+              }}
+            />
+            <div
+              className="absolute w-[2px] h-[2px] bg-white rounded-full"
+              style={{
+                top: "18%",
+                left: "82%",
+                boxShadow: "0 0 4px #fff",
+                animation: "sc-shootingStar 2.8s ease-out 1.2s infinite",
+              }}
+            />
+            <div className="absolute inset-0 flex flex-col items-center justify-center pb-10">
+              <div
+                className="text-2xl tracking-[.2em] text-[#00E5A0] font-black"
+                style={{
+                  textShadow: "0 0 20px rgba(0,229,160,.5)",
+                  animation: "sc-fadeUp .5s .2s both",
+                }}
+              >
+                — SILENT MODE —
+              </div>
+              <div
+                className="text-white text-base tracking-[.12em] font-semibold mt-1"
+                style={{
+                  textShadow: "0 0 14px rgba(0,229,160,.35)",
+                  animation: "sc-fadeUp .5s .3s both",
+                }}
+              >
+                KIA Syros EV — EV for Everyone
+              </div>
+              <div
+                className="flex items-center gap-2 mt-3"
+                style={{ animation: "sc-fadeIn .6s .6s both" }}
+              >
+                {[0, 0.15, 0.3].map((d, i) => (
+                  <div
+                    key={i}
+                    className="w-[6px] h-[6px] rounded-full bg-[#00E5A0]"
+                    style={{ animation: `sc-pulseDot 2s ease-in-out ${d}s infinite` }}
+                  />
+                ))}
+              </div>
+              <div
+                className="text-white/70 text-sm italic font-light mt-3"
+                style={{
+                  textShadow: "0 0 10px rgba(0,229,160,.3)",
+                  animation: "sc-fadeUp .6s .8s both",
+                }}
+              >
+                ( pause and listen )
+              </div>
+              <div
+                className="flex items-center gap-2 mt-6 text-white text-[20px]"
+                style={{ animation: "sc-fadeUp .6s 1.2s both" }}
+              >
+                <span>Experience silence differently.</span>
+                <span
+                  className="inline-block"
+                  style={{ animation: "sc-carDrift 1.2s ease-in-out infinite" }}
+                >
+                  →
+                </span>
+              </div>
+            </div>
+            <div className="absolute left-0 right-0 bottom-0 h-[3px] bg-white/10">
+              <div
+                className="h-full bg-[#00E5A0]"
+                style={{ animation: "sc-progressFill 6s linear 0.5s both" }}
+              />
+            </div>
+          </div>
+
+          {/* SCENE 3 — REVEAL */}
+          <div
+            className="absolute inset-0"
+            style={{
+              opacity: scene === "reveal" ? 1 : 0,
+              transition: "opacity 0.5s",
+              pointerEvents: scene === "reveal" ? "auto" : "none",
+            }}
+          >
+            <video
+              ref={driveVidRef}
+              src={ROAD_VIDEO}
+              muted
+              playsInline
+              loop
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ filter: "brightness(.7) saturate(1.05)" }}
+            />
+            <div
+              className="absolute right-0 top-0 bottom-0 w-[55%] overflow-hidden"
+              style={{
+                clipPath: "polygon(12% 0, 100% 0, 100% 100%, 0 100%)",
+                animation: scene === "reveal" ? "sc-fadeIn .8s .2s both" : "none",
+              }}
+            >
+              <video
+                ref={carVidRef}
+                src={CAR_DRIVE_VIDEO}
+                muted
+                playsInline
+                loop
+                preload="auto"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+            <div
+              className="absolute left-5 top-1/2 -translate-y-1/2 max-w-[42%] z-10"
+              style={{ animation: scene === "reveal" ? "sc-fadeUp .8s .2s both" : "none" }}
+            >
+              <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/15 backdrop-blur text-white text-[8px] tracking-[.25em] mb-3 border border-white/20">
+                <span className="w-[5px] h-[5px] rounded-full bg-[#5AE0A0]" /> 100% ELECTRIC
+              </div>
+              <h2
+                className="text-white font-extrabold leading-[1.05] text-xl md:text-2xl"
+                style={{ textShadow: "0 4px 20px rgba(0,0,0,.6)" }}
+              >
+                Not a glitch.
+                <br />
+                <span className="text-[#5AE0A0]">Just the sound of silence.</span>
+              </h2>
+              <p className="text-white/85 mt-1 text-xs">Syros EV. EV for Everyone.</p>
+              <div className="mt-3 flex gap-1">
+                {[
+                  { src: THUMB1, label: "RED" },
+                  { src: THUMB2, label: "BLUE" },
+                  { src: THUMB3, label: "WHITE" },
+                  { src: THUMB4, label: "BLUE" },
+                ].map((t, i) => (
+                  <div
+                    key={t.label}
+                    className="relative w-[52px] h-[34px] rounded overflow-hidden border border-white/25 shadow-lg"
+                    style={{ animation: `sc-fadeUp .6s ${0.5 + i * 0.1}s both` }}
+                  >
+                    <img src={t.src} alt={t.label} className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-black/30" />
+                    <div className="absolute bottom-px left-1 text-[6px] tracking-[.12em] text-white font-bold">
+                      {t.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-3 flex items-center gap-2">
+                <a
+                  href="https://www.kia.com/in/our-vehicles/syros/showroom.html"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 bg-white text-black font-semibold px-4 py-2 rounded-full hover:bg-[#5AE0A0] hover:text-black transition-colors text-xs"
+                >
+                  Book a Test Drive <span>→</span>
+                </a>
+                <a
+                  href="https://www.kia.com/in/our-vehicles/syros/showroom.html"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-white/90 text-xs underline-offset-4 hover:underline"
+                >
+                  Explore Syros
+                </a>
+              </div>
+            </div>
+            <div className="absolute top-3 right-4 flex items-center gap-1.5 text-white z-10">
+              <span className="font-black tracking-widest text-sm">KIA</span>
+              <span className="w-px h-3 bg-white/40" />
+              <span className="text-[9px] tracking-[.2em]">SYROS EV</span>
+            </div>
+          </div>
+
+          {/* Progress bar */}
+          <div className="absolute left-0 right-0 bottom-0 h-[3px] bg-white/10">
+            <div
+              className="h-full bg-[#5AE0A0]"
+              style={{
+                width: scene === "chaos" ? "33%" : scene === "pause" ? "55%" : "100%",
+                transition: "width 2.5s linear",
+              }}
+            />
+          </div>
+
+          {showReplay && (
+            <button
+              onClick={replay}
+              className="absolute top-3 left-3 bg-black/60 backdrop-blur text-white text-[10px] px-2.5 py-1 rounded-full border border-white/20 hover:bg-black/80 z-20"
+            >
+              ↻ Replay
+            </button>
+          )}
+
+          {showDetails && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: 12,
+                left: "50%",
+                transform: "translateX(-50%)",
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                padding: "8px 16px",
+                borderRadius: 12,
+                background: "rgba(14, 14, 16, 0.85)",
+                backdropFilter: "blur(12px)",
+                border: "1px solid rgba(245, 242, 237, 0.08)",
+                zIndex: 5,
+                animation: "sc-fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 9,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.12em",
+                  color: "rgba(245, 242, 237, 0.5)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                }}
+              >
+                <Monitor size={11} />
+                Full Screen
+              </div>
+              <div style={{ width: 1, height: 14, background: "rgba(245, 242, 237, 0.1)" }} />
+              <span
+                style={{
+                  fontSize: 10,
+                  color: "rgba(245, 242, 237, 0.7)",
+                  fontWeight: 500,
+                }}
+              >
+                The Silent Pause
+              </span>
+              <div style={{ width: 1, height: 14, background: "rgba(245, 242, 237, 0.1)" }} />
+              <a
+                href="/experience-creative2"
+                style={{
+                  fontSize: 9,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.12em",
+                  color: "#5AE0A0",
+                  textDecoration: "none",
+                  fontWeight: 600,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 4,
+                }}
+              >
+                View Full Experience <ArrowUpRight size={10} />
+              </a>
+            </div>
+          )}
+
+          {showDetails && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: 12,
+                left: "50%",
+                transform: "translateX(-50%)",
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+                padding: "8px 16px",
+                borderRadius: 12,
+                background: "rgba(14, 14, 16, 0.85)",
+                backdropFilter: "blur(12px)",
+                border: "1px solid rgba(245, 242, 237, 0.08)",
+                zIndex: 5,
+                animation: "sc-fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 9,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.12em",
+                  color: "rgba(245, 242, 237, 0.5)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                }}
+              >
+                <Monitor size={11} />
+                Full Screen
+              </div>
+              <div style={{ width: 1, height: 14, background: "rgba(245, 242, 237, 0.1)" }} />
+              <span
+                style={{
+                  fontSize: 10,
+                  color: "rgba(245, 242, 237, 0.7)",
+                  fontWeight: 500,
+                }}
+              >
+                The Silent Pause
+              </span>
+              <div style={{ width: 1, height: 14, background: "rgba(245, 242, 237, 0.1)" }} />
+              <a
+                href="/experience-creative2"
+                style={{
+                  fontSize: 9,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.12em",
+                  color: "#5AE0A0",
+                  textDecoration: "none",
+                  fontWeight: 600,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 4,
+                }}
+              >
+                View Full Experience <ArrowUpRight size={10} />
+              </a>
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 }

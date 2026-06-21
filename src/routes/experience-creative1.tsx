@@ -9,13 +9,16 @@ import trafficAudioUrl from "../assets/traffic.mp3";
 import kiaSyrosImgUrl from "../assets/kia-syros.png";
 import kiaSyrosDriveUrl from "../assets/kia-syros-drive.mp4";
 
-export const Route = createFileRoute("/experience")({
+export const Route = createFileRoute("/experience-creative1")({
   head: () => ({
     meta: [
       { title: "Syros EV — Sound vs Silence" },
       { name: "description", content: "Less Noise. More Journey. The silent power of Syros EV." },
       { property: "og:title", content: "Syros EV — Sound vs Silence" },
-      { property: "og:description", content: "Less Noise. More Journey. The silent power of Syros EV." },
+      {
+        property: "og:description",
+        content: "Less Noise. More Journey. The silent power of Syros EV.",
+      },
     ],
   }),
   component: Index,
@@ -182,8 +185,7 @@ function Index() {
     };
   }, [popupVisible, currentState]);
 
-  const leftWidth =
-    currentState === 1 ? 50 : currentState === 2 ? 75 : 0;
+  const leftWidth = currentState === 1 ? 50 : currentState === 2 ? 75 : 0;
   const rightWidth = 100 - leftWidth;
 
   const goState3 = () => {
@@ -200,8 +202,7 @@ function Index() {
     if (audioRef.current) return audioRef.current;
     const AC =
       window.AudioContext ||
-      (window as unknown as { webkitAudioContext: typeof AudioContext })
-        .webkitAudioContext;
+      (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
     const ctx = new AC();
 
     const masterGain = ctx.createGain();
@@ -302,7 +303,12 @@ function Index() {
     return () => {
       const a = audioRef.current;
       if (!a) return;
-      try { a.trafficEl.pause(); a.trafficEl.src = ""; } catch { /* noop */ }
+      try {
+        a.trafficEl.pause();
+        a.trafficEl.src = "";
+      } catch {
+        /* noop */
+      }
       a.ctx.close().catch(() => {});
       audioRef.current = null;
     };
@@ -329,8 +335,7 @@ function Index() {
         background: "#000",
         overflow: "hidden",
         WebkitFontSmoothing: "antialiased",
-        fontFamily:
-          '"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+        fontFamily: '"DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       }}
     >
       <style>{`
@@ -614,14 +619,18 @@ function Index() {
               height: popupZooming ? "100vh" : "auto",
               padding: 0,
               background: "linear-gradient(145deg, rgba(10,20,30,0.95), rgba(5,15,25,0.98))",
-              border: popupZooming ? "1px solid rgba(0,212,170,0)" : "1px solid rgba(0,212,170,0.6)",
+              border: popupZooming
+                ? "1px solid rgba(0,212,170,0)"
+                : "1px solid rgba(0,212,170,0.6)",
               borderRadius: popupZooming ? 0 : 20,
               overflow: "hidden",
               cursor: "pointer",
               textAlign: "left",
               zIndex: popupZooming ? 30 : 5,
               backdropFilter: "blur(12px)",
-              boxShadow: popupZooming ? "none" : "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,212,170,0.1), inset 0 1px 0 rgba(255,255,255,0.05)",
+              boxShadow: popupZooming
+                ? "none"
+                : "0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,212,170,0.1), inset 0 1px 0 rgba(255,255,255,0.05)",
               transition: "all 1.1s cubic-bezier(0.7, 0, 0.2, 1)",
               transform: popupZooming ? "scale(1)" : undefined,
             }}
@@ -667,7 +676,14 @@ function Index() {
                 <span style={{ color: "#fff", fontSize: 15, fontWeight: 600, letterSpacing: 0.3 }}>
                   Escape the chaos
                 </span>
-                <span style={{ color: "rgba(0,212,170,0.8)", fontSize: 11, letterSpacing: 1.5, textTransform: "uppercase" }}>
+                <span
+                  style={{
+                    color: "rgba(0,212,170,0.8)",
+                    fontSize: 11,
+                    letterSpacing: 1.5,
+                    textTransform: "uppercase",
+                  }}
+                >
                   Experience serenity →
                 </span>
               </div>
@@ -828,8 +844,7 @@ function Index() {
             height: "100%",
             background: "#fff",
             zIndex: 4,
-            transition:
-              "left 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease",
+            transition: "left 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease",
             opacity: currentState === 3 ? 0 : 1,
           }}
         />
@@ -989,9 +1004,7 @@ function Index() {
             >
               Discover Syros EV
             </button>
-            <span style={{ color: "rgba(255,255,255,0.4)", fontSize: 18 }}>
-              |
-            </span>
+            <span style={{ color: "rgba(255,255,255,0.4)", fontSize: 18 }}>|</span>
             <button
               className="sv-cta-ghost"
               style={{
@@ -1008,8 +1021,6 @@ function Index() {
               Watch Full Story
             </button>
           </div>
-
-
         </div>
       )}
     </div>

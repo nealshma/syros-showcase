@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ExperienceRouteImport } from './routes/experience'
+import { Route as ExperienceCreative2RouteImport } from './routes/experience-creative2'
+import { Route as ExperienceCreative1RouteImport } from './routes/experience-creative1'
 import { Route as IndexRouteImport } from './routes/index'
 
-const ExperienceRoute = ExperienceRouteImport.update({
-  id: '/experience',
-  path: '/experience',
+const ExperienceCreative2Route = ExperienceCreative2RouteImport.update({
+  id: '/experience-creative2',
+  path: '/experience-creative2',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperienceCreative1Route = ExperienceCreative1RouteImport.update({
+  id: '/experience-creative1',
+  path: '/experience-creative1',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,37 +31,48 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/experience': typeof ExperienceRoute
+  '/experience-creative1': typeof ExperienceCreative1Route
+  '/experience-creative2': typeof ExperienceCreative2Route
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/experience': typeof ExperienceRoute
+  '/experience-creative1': typeof ExperienceCreative1Route
+  '/experience-creative2': typeof ExperienceCreative2Route
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/experience': typeof ExperienceRoute
+  '/experience-creative1': typeof ExperienceCreative1Route
+  '/experience-creative2': typeof ExperienceCreative2Route
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/experience'
+  fullPaths: '/' | '/experience-creative1' | '/experience-creative2'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/experience'
-  id: '__root__' | '/' | '/experience'
+  to: '/' | '/experience-creative1' | '/experience-creative2'
+  id: '__root__' | '/' | '/experience-creative1' | '/experience-creative2'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ExperienceRoute: typeof ExperienceRoute
+  ExperienceCreative1Route: typeof ExperienceCreative1Route
+  ExperienceCreative2Route: typeof ExperienceCreative2Route
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/experience': {
-      id: '/experience'
-      path: '/experience'
-      fullPath: '/experience'
-      preLoaderRoute: typeof ExperienceRouteImport
+    '/experience-creative2': {
+      id: '/experience-creative2'
+      path: '/experience-creative2'
+      fullPath: '/experience-creative2'
+      preLoaderRoute: typeof ExperienceCreative2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experience-creative1': {
+      id: '/experience-creative1'
+      path: '/experience-creative1'
+      fullPath: '/experience-creative1'
+      preLoaderRoute: typeof ExperienceCreative1RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,7 +87,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ExperienceRoute: ExperienceRoute,
+  ExperienceCreative1Route: ExperienceCreative1Route,
+  ExperienceCreative2Route: ExperienceCreative2Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
