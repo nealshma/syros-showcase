@@ -21,12 +21,12 @@ import trafficAudioUrl from "../assets/traffic.mp3";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Showcase — Soundscape Transition" },
+      { title: "NOISE VS SILENCE — Creative Showcase" },
       {
         name: "description",
-        content: "Creative showcase — immersive brand experiences and interactive storytelling.",
+        content: "NOISE VS SILENCE — A Kia Syros EV immersive brand experience.",
       },
-      { property: "og:title", content: "Showcase — Soundscape Transition" },
+      { property: "og:title", content: "NOISE VS SILENCE — Creative Showcase" },
       { property: "og:description", content: "Explore our creative projects." },
     ],
   }),
@@ -428,7 +428,7 @@ function Showcase() {
               overflow: "hidden",
             }}
           >
-            {/* === CREATIVE 1: Soundscape Transition === */}
+            {/* === CREATIVE 1: NOISE VS SILENCE === */}
             <div
               className="sw-creative-card"
               onClick={() => openCreative(1)}
@@ -671,7 +671,6 @@ function Showcase() {
                         fontStyle: "italic",
                       }}
                     >
-                      № 01
                     </span>
                     <span
                       style={{
@@ -702,7 +701,7 @@ function Showcase() {
                       color: "#F5F2ED",
                     }}
                   >
-                    Soundscape Transition
+                    NOISE VS SILENCE
                   </h3>
                   <p
                     style={{
@@ -954,7 +953,7 @@ function Showcase() {
               color: "rgba(245, 242, 237, 0.3)",
             }}
           >
-            <span>Soundscape Transition · Creative Showcase · {new Date().getFullYear()}</span>
+            <span>NOISE VS SILENCE · Creative Showcase · {new Date().getFullYear()}</span>
             <span>Kia Syros EV — Less Noise. More Journey.</span>
           </div>
         </footer>
@@ -1040,7 +1039,7 @@ function Showcase() {
                     color: "rgba(245, 242, 237, 0.7)",
                   }}
                 >
-                  {selectedCreative === 1 ? "Soundscape Transition — Kia Syros EV" : "Coming Soon"}
+                  {selectedCreative === 1 ? "NOISE VS SILENCE — Kia Syros EV" : "Coming Soon"}
                 </span>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
