@@ -1679,6 +1679,7 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
   const [runKey, setRunKey] = useState(0);
   const [showReplay, setShowReplay] = useState(false);
   const [showDetails] = useState(true);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     if (!started) {
@@ -1687,7 +1688,28 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
     }
   }, [started]);
 
+  useEffect(() => {
+    if (!started || !scene) return;
+    setProgress(0);
+    const durations: Record<Scene, number> = { chaos: 5000, pause: 4000, reveal: 6000 };
+    const total = durations[scene];
+    const step = 50;
+    const increment = 100 / (total / step);
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        const next = prev + increment;
+        return next >= 100 ? 100 : next;
+      });
+    }, step);
+    return () => clearInterval(interval);
+  }, [scene, started]);
+
   const audioRef = useRef<HTMLAudioElement>(null);
+  const peaceAudioRef = useRef<{
+    ctx: AudioContext;
+    gain: GainNode;
+    nodes: AudioNode[];
+  } | null>(null);
   const chaosVidRef = useRef<HTMLVideoElement>(null);
   const driveVidRef = useRef<HTMLVideoElement>(null);
   const carVidRef = useRef<HTMLVideoElement>(null);
@@ -1698,7 +1720,69 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
     timers.current = [];
   };
 
+  const stopPeaceAudio = () => {
+    const p = peaceAudioRef.current;
+    if (p) {
+      try {
+        p.ctx.close();
+      } catch {
+        /* noop */
+      }
+      peaceAudioRef.current = null;
+    }
+  };
+
+  const initPeaceAudio = () => {
+    stopPeaceAudio();
+    const AC =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    const ctx = new AC();
+    const gain = ctx.createGain();
+    gain.gain.value = soundOn ? 0.3 : 0;
+    gain.connect(ctx.destination);
+    const nodes: AudioNode[] = [];
+    const padFreqs = [110, 164.81, 220, 329.63];
+    padFreqs.forEach((f, i) => {
+      const o = ctx.createOscillator();
+      o.type = "sine";
+      o.frequency.value = f;
+      const g = ctx.createGain();
+      g.gain.value = 0.08;
+      const lfo = ctx.createOscillator();
+      lfo.frequency.value = 0.15 + i * 0.05;
+      const lfoGain = ctx.createGain();
+      lfoGain.gain.value = 0.03;
+      lfo.connect(lfoGain);
+      lfoGain.connect(g.gain);
+      o.connect(g);
+      g.connect(gain);
+      o.start();
+      lfo.start();
+      nodes.push(o, lfo, g, lfoGain);
+    });
+    const bufferSize = 2 * ctx.sampleRate;
+    const airBuf = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const airData = airBuf.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) airData[i] = (Math.random() * 2 - 1) * 0.5;
+    const air = ctx.createBufferSource();
+    air.buffer = airBuf;
+    air.loop = true;
+    const airFilter = ctx.createBiquadFilter();
+    airFilter.type = "lowpass";
+    airFilter.frequency.value = 800;
+    const airGain = ctx.createGain();
+    airGain.gain.value = 0.06;
+    air.connect(airFilter);
+    airFilter.connect(airGain);
+    airGain.connect(gain);
+    air.start();
+    nodes.push(air, airFilter, airGain);
+    peaceAudioRef.current = { ctx, gain, nodes };
+  };
+
   const start = async () => {
+    stopPeaceAudio();
     setStarted(true);
     setScene("chaos");
     setShowReplay(false);
@@ -1725,6 +1809,7 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
     timers.current.push(
       setTimeout(() => {
         setScene("reveal");
+        initPeaceAudio();
         if (driveVidRef.current) {
           driveVidRef.current.currentTime = 0;
           driveVidRef.current.play().catch(() => {});
@@ -1733,15 +1818,19 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
           carVidRef.current.currentTime = 0;
           carVidRef.current.play().catch(() => {});
         }
-      }, 6500),
+      }, 9000),
     );
 
-    timers.current.push(setTimeout(() => setShowReplay(true), 13000));
+    timers.current.push(setTimeout(() => setShowReplay(true), 15000));
   };
 
   useEffect(() => {
-    if (!audioRef.current) return;
-    audioRef.current.volume = soundOn ? 0.9 : 0;
+    if (audioRef.current) {
+      audioRef.current.volume = soundOn ? 0.9 : 0;
+    }
+    if (peaceAudioRef.current) {
+      peaceAudioRef.current.gain.gain.value = soundOn ? 0.3 : 0;
+    }
   }, [soundOn]);
 
   const replay = () => {
@@ -1750,7 +1839,13 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
     setTimeout(start, 50);
   };
 
-  useEffect(() => () => clearTimers(), []);
+  useEffect(
+    () => () => {
+      clearTimers();
+      stopPeaceAudio();
+    },
+    [],
+  );
 
   return (
     <div
@@ -1804,7 +1899,7 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
               KIA SYROS EV · INTERACTIVE
             </div>
             <h2 className="text-white text-2xl font-extrabold mb-2">The Silent Pause</h2>
-            <p className="text-white/70 text-xs mb-4 max-w-xs">A 13-second immersive experience.</p>
+            <p className="text-white/70 text-xs mb-4 max-w-xs">A 15-second immersive experience.</p>
             <button
               onClick={start}
               className="inline-flex items-center gap-2 bg-[#5AE0A0] text-black font-semibold px-5 py-2.5 rounded-full hover:bg-white transition-colors text-sm"
@@ -2052,7 +2147,6 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
             <video
               ref={driveVidRef}
               src={ROAD_VIDEO}
-              muted
               playsInline
               loop
               preload="auto"
@@ -2069,7 +2163,6 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
               <video
                 ref={carVidRef}
                 src={CAR_DRIVE_VIDEO}
-                muted
                 playsInline
                 loop
                 preload="auto"
@@ -2143,7 +2236,7 @@ function Creative2Full({ soundOn }: { soundOn: boolean }) {
             <div
               className="h-full bg-[#5AE0A0]"
               style={{
-                width: scene === "chaos" ? "33%" : scene === "pause" ? "55%" : "100%",
+                width: `${progress}%`,
                 transition: "width 2.5s linear",
               }}
             />
