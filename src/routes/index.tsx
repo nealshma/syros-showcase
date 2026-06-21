@@ -351,7 +351,7 @@ function Showcase() {
             background: "linear-gradient(180deg, rgba(0, 212, 170, 0.04) 0%, transparent 100%)",
           }}
         >
-          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "60px 32px 48px" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", padding: "16px 32px" }}>
             <div
               style={{
                 display: "inline-flex",
