@@ -321,7 +321,7 @@ export default function Showcase() {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: 2,
+                gap: 1,
                 color: "rgba(245, 242, 237, 0.7)",
               }}
             >
