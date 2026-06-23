@@ -304,11 +304,12 @@ export default function Showcase() {
                 }}
               />
               <img
-                src="https://cdn.adcountymedia.com/upload/2026-04-27/b38cd1323d4e70fb/new-and-white.png"
+                src="https://cdn.adcountymedia.com/upload/2026-06-23/30ceedef7e4512dc/adaxxprologo.png"
                 alt="AdaxxPro"
                 style={{
                   position: "relative",
-                  height: 64,
+                  height: 60,
+                  padding: "10px 0",
                   width: "auto",
                   filter:
                     "brightness(1.15) contrast(1.15) drop-shadow(0 0 10px rgba(0,229,255,0.15))",
